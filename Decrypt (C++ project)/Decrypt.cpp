@@ -46,6 +46,12 @@ Return c[1]...c[L + num_rand_characters]
 
 //Do decryption here
 string decryption_scheme(string input) {
+	/* The different parameters */
+	int L = 500;
+	int u = 5;
+	int v = 50;
+	int t = 5;		//Between 1 and 24
+
 	string output;
 	int j = 0;
 
@@ -82,8 +88,6 @@ string decryption_scheme(string input) {
 
 int main() {
 
-//1. print on screen something like "Enter the ciphertext:",
-//2. obtain the ciphertext from stdin,
 	string input;
 	string output;
 	cout << "Enter the ciphertext: " << endl;
