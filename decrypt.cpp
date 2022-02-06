@@ -1,3 +1,8 @@
+#include<iostream>
+#include<string>
+
+using namespace std;
+
 /*
 
 Instructions:
@@ -20,3 +25,23 @@ Until ciphertext_pointer > L + num_rand_characters
 Return c[1]...c[L + num_rand_characters]
 
 */
+
+/*
+print on screen something like "Enter the ciphertext:",
+obtain the ciphertext from stdin,
+apply some cryptanalysis strategy and
+output on screen something like "My plaintext guess is:" followed by the plaintext found by your strategy.
+*/
+
+void decryption_scheme(string input) {
+
+}
+
+int main() {
+
+	string input;
+
+	cout << "Enter the ciphertext: " << endl;
+	cin >> input
+
+}
