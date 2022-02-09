@@ -20,6 +20,7 @@ int coin_generation_algorithm(int ciphertext_pointer, L)
 }
 
 /*
+
 Pseudocode
 
 Instructions:
