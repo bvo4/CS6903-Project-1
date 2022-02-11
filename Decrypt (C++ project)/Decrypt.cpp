@@ -11,6 +11,16 @@
 
 using namespace std;
 
+/*
+ TA NOTE:
+
+ YOU ARE NOT EXPECTED TO DO WELL ON THE 2ND TEST CASE.
+ FOCUS ON THE FIRST TEST CASE THEN TRY TO ATTEMPT THE 2ND PART
+ REPLICATE THE ENCRYPTION SCHEME FIRST THEN ATTEMPT DECRYPTON
+ BEGIN WITH PROB OF RANDOM CHARACTER = 0 THEN INCREASE THE PROBABILITY
+
+*/
+
 string main_encrypt(string input, string key);
 string encrypt(string input, string key);
 string cipheredIt(string msg, string encoded);
@@ -49,7 +59,6 @@ string decryption_scheme(string input, string k) {
 	/*
 	* Key Length is at most 24
 	* Message length is at most 24
-	
 	*/
 
 	return output;
@@ -102,10 +111,6 @@ string main_encrypt(string input, string key)
 	int prob_of_random_ciphertext = 0.95;
 	string CT = "";
 
-	//FLIP A COIN, IF 1, ENCRYPT USING THE STANDARD METHOD
-	//ELSE, ENCRYPT USING A RANDOM SYMBOL
-	//BEFORE MOVING THE PLAINTEXT ENCRYPTION, FLIP A COIN AND DECIDE IF WE SHOULD PUT IN A RANDOM CHARACTER
-
 
 	/*
 		Repeat
@@ -123,18 +128,42 @@ string main_encrypt(string input, string key)
 	*/
 
 	int coin_value = coin_generation_algorithm(ciphertext_pointer, input.length());  // coin_value is a real number in [0,1]
-	if (prob_of_random_ciphertext < coin_value && coin_value <= 1)
-	{
-		//randomly choose a character c from {<space>,a,..,z}
-		char c = random_letter_generator();
 
-		//set c[ciphertext_pointer] = k[j]
-		CT[ciphertext_pointer] = c;
+/*
+TA NOTE:
 
+	abc  = plain text
+	abc = KEY
+	pt pointer is at a
+	flip a coin. if 0<=value<=prob of random ciphertext
+	insert random char
+	else
+	encrypt pt a with char a from the key
 
-		ciphertext_pointer++;
-	}
+*/
+	do {
+		if (prob_of_random_ciphertext < coin_value && coin_value <= 1)
+		{
+			//set j = m[message_pointer] // j is a value between 0 and 26
+			int j = input[message_pointer];
 
+			//set c[ciphertext_pointer] = k[j]
+			CT[ciphertext_pointer] = key[j];
+			message_pointer++;
+
+			ciphertext_pointer++;
+		}
+
+		if (0 <= coin_value && coin_value <= prob_of_random_ciphertext)
+		{
+			//randomly choose a character c from {<space>,a,..,z}
+			char c = random_letter_generator();
+
+			//set c[ciphertext_pointer] = c
+			CT[ciphertext_pointer] = c;
+			ciphertext_pointer++;
+		}
+	} while (ciphertext_pointer < L = num_rand_characters);
 }
 
 //Using http://pi.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html
