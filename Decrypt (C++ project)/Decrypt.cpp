@@ -8,6 +8,7 @@
 
 using namespace std;
 
+//randomly choose a character c from{ <space>,a,..,z }
 char random_letter_generator()
 {
 	return 'a' + rand() % 26;
@@ -15,13 +16,15 @@ char random_letter_generator()
 
 int coin_generation_algorithm(int ciphertext_pointer, L)
 {
+	// coin_value is a real number in [0,1]
 	int coin_value = 0;
+	/*
+	PLACEHOLDER CODE FOR COIN GENERATION
+	*/
 	return coin_value;
 }
 
 /*
-
-Pseudocode
 
 Instructions:
 ciphertext_pointer = 1
@@ -71,8 +74,6 @@ string decryption_scheme(string input) {
 
 	if (0 <= coin_value && coin_value <= prob_of_random_ciphertext)
 	{
-
-		//randomly choose a character c from{ <space>,a,..,z }
 		char rand_letter = random_letter_generator();
 
 
@@ -81,15 +82,16 @@ string decryption_scheme(string input) {
 		ciphertext_pointer = ciphertext_pointer + 1
 		Until ciphertext_pointer > L + num_rand_characters
 	}
-		Return c[1]...c[L + num_rand_characters]
-
+	//Return c[1]...c[L + num_rand_characters]
 	return output;
+
 }
 
 int main() {
 
 	string input;
 	string output;
+
 	cout << "Enter the ciphertext: " << endl;
 	cin >> input;
 
