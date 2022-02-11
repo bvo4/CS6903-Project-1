@@ -1,5 +1,6 @@
 #include<iostream>
 #include<string>
+#include<vector>
 #include<random>
 #include<stdio.h>
 #include<stdlib.h>
@@ -10,8 +11,13 @@
 
 using namespace std;
 
+string main_encrypt(string input, string key);
 string encrypt(string input, string key);
 string cipheredIt(string msg, string encoded);
+void define_letter_frequency(char frequency_map[]);
+char frequency_map[26];
+
+
 
 //randomly choose a character c from{ <space>,a,..,z }
 char random_letter_generator()
@@ -30,30 +36,7 @@ int coin_generation_algorithm(int ciphertext_pointer, int L)
 	return coin_value;
 }
 
-/*
-
-Instructions:
-ciphertext_pointer = 1
-message_pointer = 1
-num_rand_characters = 0
-prob_of_random_ciphertext = 0.05
-Repeat
-let coin_value = coin_generation_algorithm(ciphertext_pointer,L)  // coin_value is a real number in [0,1]
-if prob_of_random_ciphertext < coin_value <= 1 then
-set j = m[message_pointer] // j is a value between 0 and 26
-set c[ciphertext_pointer] = k[j]
-message_pointer = message_pointer + 1
-if 0 <= coin_value <= prob_of_random_ciphertext then
-randomly choose a character c from {<space>,a,..,z}
-set c[ciphertext_pointer] = c
-num_rand_characters = num_rand_characters + 1
-ciphertext_pointer = ciphertext_pointer +1
-Until ciphertext_pointer > L + num_rand_characters
-Return c[1]...c[L + num_rand_characters]
-
-*/
-
-//Do decryption here
+/* Part 1 will involve a known-plaintext attack since we're using a plaintext dictionary to decrypt ciphertext */
 string decryption_scheme(string input, string k) {
 	/* The different parameters */
 	int L = 500;		//Length of message
@@ -63,35 +46,12 @@ string decryption_scheme(string input, string k) {
 
 	string output;
 	int j = 0;
-
-	
-	int ciphertext_pointer = 1;
-	int message_pointer = 1;
-	int num_rand_characters = 0;
-	int prob_of_random_ciphertext = 0.95;
-	//Repeat
-	
-	int coin_value = coin_generation_algorithm(ciphertext_pointer, L);  // coin_value is a real number in [0,1]
 	/*
-	if (prob_of_random_ciphertext < coin_value && prob_of_random_ciphertext <= 1)
-	{
-		j = m[message_pointer]; // j is a value between 0 and 26
-		c[ciphertext_pointer] = k[j];
-		message_pointer++;
-	}
-
-	if (0 <= coin_value && coin_value <= prob_of_random_ciphertext)
-	{
-		char rand_letter = random_letter_generator();
-
-
-		set c[ciphertext_pointer] = c
-		num_rand_characters = num_rand_characters + 1
-		ciphertext_pointer = ciphertext_pointer + 1
-		Until ciphertext_pointer > L + num_rand_characters
-	}
-	//Return c[1]...c[L + num_rand_characters]
+	* Key Length is at most 24
+	* Message length is at most 24
+	
 	*/
+
 	return output;
 
 }
@@ -100,7 +60,7 @@ int main() {
 
 	string input;
 	string output;
-	string key
+	string key;
 
 	if (ENCRYPT)
 	{
@@ -132,6 +92,56 @@ int main() {
 		cout << "My plaintext guess is:  " << output << endl;
 	}
 }
+
+//Attempting to recreate the pr ofessor's encryption scheme from his pseudocode
+string main_encrypt(string input, string key)
+{
+	int ciphertext_pointer = 0;
+	int message_pointer = 1;
+	int num_rand_characters = 0;
+	int prob_of_random_ciphertext = 0.95;
+	string CT = "";
+
+	//FLIP A COIN, IF 1, ENCRYPT USING THE STANDARD METHOD
+	//ELSE, ENCRYPT USING A RANDOM SYMBOL
+	//BEFORE MOVING THE PLAINTEXT ENCRYPTION, FLIP A COIN AND DECIDE IF WE SHOULD PUT IN A RANDOM CHARACTER
+
+
+	/*
+		Repeat
+			let coin_value = coin_generation_algorithm(ciphertext_pointer,L)  // coin_value is a real number in [0,1]
+			if prob_of_random_ciphertext < coin_value <= 1 then
+			set j = m[message_pointer] // j is a value between 0 and 26
+			set c[ciphertext_pointer] = k[j]  
+			message_pointer = message_pointer + 1
+			if 0 <= coin_value <= prob_of_random_ciphertext then
+			randomly choose a character c from {<space>,a,..,z}
+			set c[ciphertext_pointer] = c
+			num_rand_characters = num_rand_characters + 1
+			ciphertext_pointer = ciphertext_pointer +1   
+		Until ciphertext_pointer > L + num_rand_characters
+	*/
+
+	int coin_value = coin_generation_algorithm(ciphertext_pointer, input.length());  // coin_value is a real number in [0,1]
+	if (prob_of_random_ciphertext < coin_value && coin_value <= 1)
+	{
+		//randomly choose a character c from {<space>,a,..,z}
+		char c = random_letter_generator();
+
+		//set c[ciphertext_pointer] = k[j]
+		CT[ciphertext_pointer] = c;
+
+
+		ciphertext_pointer++;
+	}
+
+}
+
+//Using http://pi.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html
+//To define the default mapping for each letter based on frequency
+
+
+
 
 //Taken from:  https://www.geeksforgeeks.org/keyword-cipher/#:~:text=A%20keyword%20cipher%20is%20a,%2C%20B%2C%20C%2C%20etc.
 //Will remove once we get the plaintext dictionary
