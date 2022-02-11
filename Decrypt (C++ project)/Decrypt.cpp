@@ -6,7 +6,11 @@
 #include<time.h>
 #include<math.h>
 
+#define ENCRYPT true
+
 using namespace std;
+
+string encrypt(string input);
 
 //randomly choose a character c from{ <space>,a,..,z }
 char random_letter_generator()
@@ -92,9 +96,33 @@ int main() {
 	string input;
 	string output;
 
-	cout << "Enter the ciphertext: " << endl;
-	cin >> input;
+	if (ENCRYPT)
+	{
+		cout << "Enter plaintext " << endl;
+		cin >> input;
+		cout << "Ciphertext:  " << endl;
+	}
+	else
+	{
+		cout << "Enter the ciphertext: " << endl;
+		cin >> input;
 
-	output = decryption_scheme(input);
-	cout << "My plaintext guess is:  " << output << endl;
+		output = decryption_scheme(input);
+		cout << "My plaintext guess is:  " << output << endl;
+	}
+}
+
+string encrypt(string input)
+{
+	/*
+	Professor mentioned that given a key,
+	we would be able to encrypt a plaintesxt message into the matching ciphertext,
+	so leaving this here in case it's needed
+	*/
+	
+	string ciphertext;
+	//Defines which of the 26 letters are being used
+	bool letters[26];
+
+
 }
