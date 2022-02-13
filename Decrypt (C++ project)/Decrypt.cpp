@@ -21,9 +21,7 @@ using namespace std;
 
 */
 
-string main_encrypt(string input, string key);
 string encrypt(string input, string key);
-string cipheredIt(string msg, string encoded);
 void define_letter_frequency(char frequency_map[]);
 char frequency_map[26];
 
@@ -82,9 +80,9 @@ int main() {
 		cin >> key;
 
 		key = "secret";
-		key = encrypt(input, key);
+		output = encrypt(input, key);
 
-		output = cipheredIt(input, key);
+		//output = cipheredIt(input, key);
 
 		cout << "Ciphertext:  " << output << endl;
 
@@ -103,15 +101,6 @@ int main() {
 }
 
 //Attempting to recreate the pr ofessor's encryption scheme from his pseudocode
-string main_encrypt(string input, string key)
-{
-	int ciphertext_pointer = 0;
-	int message_pointer = 1;
-	int num_rand_characters = 0;
-	int prob_of_random_ciphertext = 0.95;
-	string CT = "";
-
-
 	/*
 		Repeat
 			let coin_value = coin_generation_algorithm(ciphertext_pointer,L)  // coin_value is a real number in [0,1]
@@ -126,6 +115,13 @@ string main_encrypt(string input, string key)
 			ciphertext_pointer = ciphertext_pointer +1   
 		Until ciphertext_pointer > L + num_rand_characters
 	*/
+string encrypt(string input, string key)
+{
+	int ciphertext_pointer = 0;
+	int message_pointer = 1;
+	int num_rand_characters = 0;
+	int prob_of_random_ciphertext = 0;
+	string CT("", input.length());
 
 	int coin_value = coin_generation_algorithm(ciphertext_pointer, input.length());  // coin_value is a real number in [0,1]
 
@@ -163,89 +159,9 @@ TA NOTE:
 			CT[ciphertext_pointer] = c;
 			ciphertext_pointer++;
 		}
-	} while (ciphertext_pointer < L = num_rand_characters);
-}
+		//Until ciphertext_pointer > L + num_rand_characters
+	} while (ciphertext_pointer > (input.length() + num_rand_characters));
+	//Return c[1]...c[L + num_rand_characters]
+	return CT;
 
-//Using http://pi.math.cornell.edu/~mec/2003-2004/cryptography/subs/frequencies.html
-//To define the default mapping for each letter based on frequency
-
-
-
-
-//Taken from:  https://www.geeksforgeeks.org/keyword-cipher/#:~:text=A%20keyword%20cipher%20is%20a,%2C%20B%2C%20C%2C%20etc.
-//Will remove once we get the plaintext dictionary
-string encrypt(string input, string key)
-{
-	/*
-	Professor mentioned that given a key,
-	we would be able to encrypt a plaintesxt message into the matching ciphertext,
-	so leaving this here in case it's needed
-	*/
-	string encoded = "";
-	// This array represents the
-	// 26 letters of alphabets
-	bool arr[26] = { 0 };
-
-	// This loop inserts the keyword
-	// at the start of the encoded string
-	for (int i = 0; i < key.size(); i++)
-	{
-		if (key[i] >= 'A' && key[i] <= 'Z')
-		{
-			// To check whether the character is inserted
-			// earlier in the encoded string or not
-			if (arr[key[i] - 65] == 0)
-			{
-				encoded += key[i];
-				arr[key[i] - 65] = 1;
-			}
-		}
-		else if (key[i] >= 'a' && key[i] <= 'z')
-		{
-			if (arr[key[i] - 97] == 0)
-			{
-				encoded += key[i] - 32;
-				arr[key[i] - 97] = 1;
-			}
-		}
-	}
-
-	// This loop inserts the remaining
-	// characters in the encoded string.
-	for (int i = 0; i < 26; i++)
-	{
-		if (arr[i] == 0)
-		{
-			arr[i] = 1;
-			encoded += char(i + 65);
-		}
-	}
-	return encoded;
-}
-
-// Function that generates encodes(cipher) the message
-string cipheredIt(string msg, string encoded)
-{
-	string cipher = "";
-
-	// This loop ciphered the message.
-	// Spaces, special characters and numbers remain same.
-	for (int i = 0; i < msg.size(); i++)
-	{
-		if (msg[i] >= 'a' && msg[i] <= 'z')
-		{
-			int pos = msg[i] - 97;
-			cipher += encoded[pos];
-		}
-		else if (msg[i] >= 'A' && msg[i] <= 'Z')
-		{
-			int pos = msg[i] - 65;
-			cipher += encoded[pos];
-		}
-		else
-		{
-			cipher += msg[i];
-		}
-	}
-	return cipher;
 }
