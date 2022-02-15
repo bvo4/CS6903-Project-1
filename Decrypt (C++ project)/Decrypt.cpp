@@ -63,10 +63,11 @@ string decryption_scheme(string input, string k) {
 
 }
 
-//Given that we are
+//Must begin by figuring out how long the key length might be
 int decipher_key_length()
 {
-
+	int key_length = 0;
+	return key_length;
 }
 
 int main() {
