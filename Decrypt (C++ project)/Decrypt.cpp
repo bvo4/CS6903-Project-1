@@ -12,6 +12,16 @@
 using namespace std;
 
 /*
+
+Personal notes:
+
+For test #1, we have 5 candidate plaintexts.
+Key length is always shorter than the plaintext message.
+Since this is using the monoalphabetic substitution cipher, look at the frequency of the plaintext vs the letter frequency of the ciphertext
+
+*/
+
+/*
  TA NOTE:
 
  YOU ARE NOT EXPECTED TO DO WELL ON THE 2ND TEST CASE.
