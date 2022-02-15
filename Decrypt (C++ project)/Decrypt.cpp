@@ -24,7 +24,7 @@ using namespace std;
 string encrypt(string input, string key);
 void define_letter_frequency(char frequency_map[]);
 char frequency_map[26];
-
+int decipher_key_length();
 
 
 //randomly choose a character c from{ <space>,a,..,z }
@@ -60,6 +60,12 @@ string decryption_scheme(string input, string k) {
 	*/
 
 	return output;
+
+}
+
+//Given that we are
+int decipher_key_length()
+{
 
 }
 
