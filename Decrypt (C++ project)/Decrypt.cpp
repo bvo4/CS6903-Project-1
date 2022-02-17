@@ -117,7 +117,7 @@ int main() {
 	}
 }
 
-//Attempting to recreate the pr ofessor's encryption scheme from his pseudocode
+//Attempting to recreate the professor's encryption scheme from his pseudocode
 	/*
 		Repeat
 			let coin_value = coin_generation_algorithm(ciphertext_pointer,L)  // coin_value is a real number in [0,1]
