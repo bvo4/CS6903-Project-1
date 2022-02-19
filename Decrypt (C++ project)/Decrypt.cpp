@@ -85,25 +85,25 @@ int main() {
 	string input;
 	string output;
 	string key;
+	char frequency_map[26] = {0};
+
 
 	if (ENCRYPT)
 	{
 		//Uses a mono-alphabetic substitution cipher and attempts to decrypt it
+		define_letter_frequency(frequency_map);
 
+		/*
 		cout << "Enter plaintext " << endl;
 		cin >> input;
 
 		cout << "Enter the key:  " << endl;
 		cin >> key;
-
 		key = "secret";
-		output = encrypt(input, key);
 
-		//output = cipheredIt(input, key);
-
-		cout << "Ciphertext:  " << output << endl;
 
 		output = decryption_scheme(input, key);
+		*/
 	}
 	else
 	{
@@ -115,6 +115,32 @@ int main() {
 		output = decryption_scheme(input, key);
 		cout << "My plaintext guess is:  " << output << endl;
 	}
+}
+
+#include <fstream>
+void define_letter_frequency(char frequency_map[])
+{
+	ifstream dictionary;
+	string line;
+	dictionary.open("../../dictionary_1.txt");
+
+	while (getline(dictionary, line))
+	{
+		cout << line << endl;
+		for (int i = 0; i < line.length(); i++)
+		{
+			if (line[i] >= 'a' && line[i] <= 'z') {
+
+				++frequency_map[i];
+			}
+		}
+	}
+
+	cout << "Frequency of all alphabets in the string is:" << endl;
+	for (int i = 0; i < 26; i++)
+		cout << char(i + 'a') << " : " << frequency_map[i] << endl;
+
+	dictionary.close();
 }
 
 //Attempting to recreate the professor's encryption scheme from his pseudocode
@@ -148,7 +174,7 @@ TA NOTE:
 	abc  = plain text
 	abc = KEY
 	pt pointer is at a
-	flip a coin. if 0<=value<=prob of random ciphertext
+	flip a coin. if 0<=value<=prob of random ciphertextncy
 	insert random char
 	else
 	encrypt pt a with char a from the key
