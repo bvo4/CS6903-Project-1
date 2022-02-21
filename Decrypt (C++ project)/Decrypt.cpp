@@ -227,7 +227,7 @@ void CT_FREQUENCY(string input, int frequency_map[])
 string encrypt(string input, string key)
 {
 	int ciphertext_pointer = 0;
-	int message_pointer = 1;
+	int message_pointer = 0;
 	int num_rand_characters = 0;
 	int prob_of_random_ciphertext = 0;
 	char CT[500];
@@ -247,12 +247,13 @@ TA NOTE:
 
 */
 	do {
+		cout << "input #" << message_pointer << " : " << input[message_pointer] << endl;
 		if (isspace(input[message_pointer]))
 		{
 			message_pointer++;
 		}
 
-		if (prob_of_random_ciphertext < coin_value && coin_value <= 1)
+		else if (prob_of_random_ciphertext < coin_value && coin_value <= 1)
 		{
 			//set j = m[message_pointer] // j is a value between 0 and 26
 			int j = input[message_pointer];
@@ -275,7 +276,7 @@ TA NOTE:
 			ciphertext_pointer++;
 		}
 		//Until ciphertext_pointer > L + num_rand_characters
-	} while (ciphertext_pointer < (input.length() - 1 + num_rand_characters));
+	} while (ciphertext_pointer < (input.length() - 1 + num_rand_characters) && message_pointer < 500);
 	//Return c[1]...c[L + num_rand_characters]
 	return CT;
 
