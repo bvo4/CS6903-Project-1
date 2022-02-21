@@ -48,18 +48,26 @@ void CT_FREQUENCY(string input, int frequency_map[]);
 //randomly choose a character c from{ <space>,a,..,z }
 char random_letter_generator()
 {
-	return 'a' + rand() % 26;
+	// Initialize Mersenne Twister pseudo-random number generator
+	random_device rd;
+	mt19937 gen(rd());
+
+	//Choose a random letter a-z
+	uniform_int_distribution<> dis(0, 26);
+	return 'a' + dis(gen);
 }
 
 
+// coin_value is a real number in [0,1]
 int coin_generation_algorithm(int ciphertext_pointer, int L)
 {
-	// coin_value is a real number in [0,1]
-	int coin_value = 0;
-	/*
-	PLACEHOLDER CODE FOR COIN GENERATION
-	*/
-	return coin_value;
+	// Initialize Mersenne Twister pseudo-random number generator
+	random_device rd;
+	mt19937 gen(rd());
+
+	uniform_int_distribution<> dis(0, 1);
+	cout << "RETURNING: " << dis(gen) << endl;;
+	return dis(gen);
 }
 
 /* Part 1 will involve a known-plaintext attack since we're using a plaintext dictionary to decrypt ciphertext */
@@ -99,20 +107,14 @@ int main() {
 	if (ENCRYPT)
 	{
 		//Uses a mono-alphabetic substitution cipher and attempts to decrypt it
-		CT_FREQUENCY("abcdefghijklmnopqrstuvwxyz", frequency_map);
+		//CT_FREQUENCY("abcdefghijklmnopqrstuvwxyz", frequency_map);
 		//define_letter_frequency(frequency_map);
 
-		/*
-		cout << "Enter plaintext " << endl;
-		cin >> input;
-
-		cout << "Enter the key:  " << endl;
-		cin >> key;
-		key = "secret";
-
-
-		output = decryption_scheme(input, key);
-		*/
+		
+		//cout << "Enter plaintext " << endl;
+		//cin >> input;
+		string output = encrypt("underwaists wayfarings fluty analgia refuels transcribing nibbled okra buttonholer venalness hamlet praus apprisers presifted cubital walloper dissembler bunting wizardries squirrel preselect befitted licensee encumbrances proliferations tinkerer egrets recourse churl kolinskies ionospheric docents unnatural scuffler muches petulant acorns subconscious xyster tunelessly boners slag amazement intercapillary manse unsay embezzle stuccoer dissembles batwing valediction iceboxes ketchups phonily con", "secret");
+		cout << "Encrypted output:  " << output << endl;
 	}
 	else
 	{
@@ -229,7 +231,7 @@ string encrypt(string input, string key)
 	int message_pointer = 1;
 	int num_rand_characters = 0;
 	int prob_of_random_ciphertext = 0;
-	string CT("", input.length());
+	char CT[500];
 
 	int coin_value = coin_generation_algorithm(ciphertext_pointer, input.length());  // coin_value is a real number in [0,1]
 
@@ -248,13 +250,13 @@ TA NOTE:
 	do {
 		if (prob_of_random_ciphertext < coin_value && coin_value <= 1)
 		{
+			cout << "Standard Encryption" << endl;
 			//set j = m[message_pointer] // j is a value between 0 and 26
 			int j = input[message_pointer];
 
 			//set c[ciphertext_pointer] = k[j]
 			CT[ciphertext_pointer] = key[j];
 			message_pointer++;
-
 			ciphertext_pointer++;
 		}
 
@@ -268,7 +270,7 @@ TA NOTE:
 			ciphertext_pointer++;
 		}
 		//Until ciphertext_pointer > L + num_rand_characters
-	} while (ciphertext_pointer > (input.length() + num_rand_characters));
+	} while (ciphertext_pointer < (input.length() + num_rand_characters));
 	//Return c[1]...c[L + num_rand_characters]
 	return CT;
 
