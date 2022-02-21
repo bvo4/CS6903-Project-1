@@ -34,6 +34,14 @@ Since this is using the monoalphabetic substitution cipher, look at the frequenc
 string encrypt(string input, string key);
 void define_letter_frequency(int frequency_map[]);
 int frequency_map[26];
+
+/* The frequency mappings for plaintext #1 - #5 */
+int frequency_PT1[26] = {0};
+int frequency_PT2[26] = {0};
+int frequency_PT3[26] = {0};
+int frequency_PT4[26] = {0};
+int frequency_PT5[26] = {0};
+
 int decipher_key_length();
 void CT_FREQUENCY(string input, int frequency_map[]);
 
@@ -91,7 +99,8 @@ int main() {
 	if (ENCRYPT)
 	{
 		//Uses a mono-alphabetic substitution cipher and attempts to decrypt it
-		CT_FREQUENCY("abcdefghijklmnopqrstuvwxyz", frequency_map);
+		//CT_FREQUENCY("abcdefghijklmnopqrstuvwxyz", frequency_map);
+		define_letter_frequency(frequency_map);
 
 		/*
 		cout << "Enter plaintext " << endl;
@@ -115,6 +124,22 @@ int main() {
 		output = decryption_scheme(input, key);
 		cout << "My plaintext guess is:  " << output << endl;
 	}
+
+	return 0;
+}
+
+//Quick fucntion to quickly take the entire string and map the letter frequencies to the array
+void return_count(string line, int frequency_map[])
+{
+	int j = 0;
+	for (int i = 0; i < line.length(); i++)
+	{
+		if (line[i] >= 'a' && line[i] <= 'z')
+		{
+			j = line[i] - 'a';
+			frequency_map[j]++;
+		}
+	}
 }
 
 //Read the plaintext dictionary and calculate the letter frequency of all 5 candidates
@@ -127,19 +152,47 @@ void define_letter_frequency(int frequency_map[])
 
 	while (getline(dictionary, line))
 	{
-		cout << line << endl;
-		for (int i = 0; i < line.length(); i++)
+		if (line == "Candidate Plaintext #1")
 		{
-			if (line[i] >= 'a' && line[i] <= 'z') {
-
-				++frequency_map[i];
-			}
+			//Skip the blank line to reach the candidate plaintext
+			getline(dictionary, line); getline(dictionary, line);
+			return_count(line, frequency_PT1);
 		}
+
+		else if (line == "Candidate Plaintext #2")
+		{
+			//Skip the blank line to reach the candidate plaintext
+			getline(dictionary, line); getline(dictionary, line);
+			return_count(line, frequency_PT2);
+		}
+
+		else if (line == "Candidate Plaintext #3")
+		{
+			//Skip the blank line to reach the candidate plaintext
+			getline(dictionary, line); getline(dictionary, line);
+			return_count(line, frequency_PT3);
+		}
+
+		else if (line == "Candidate Plaintext #4")
+		{
+			//Skip the blank line to reach the candidate plaintext
+			getline(dictionary, line); getline(dictionary, line);
+			return_count(line, frequency_PT4);
+		}
+
+		else if (line == "Candidate Plaintext #5")
+		{
+			//Skip the blank line to reach the candidate plaintext
+			getline(dictionary, line); getline(dictionary, line);
+			return_count(line, frequency_PT5);
+		}
+
 	}
 
 	cout << "Frequency of all alphabets in the string is:" << endl;
+
 	for (int i = 0; i < 26; i++)
-		cout << char(i + 'a') << " : " << frequency_map[i] << endl;
+		cout << char(i + 'a') << " : " << frequency_PT5[i] << endl;
 
 	dictionary.close();
 }
@@ -153,7 +206,6 @@ void CT_FREQUENCY(string input, int frequency_map[])
 		if (input[i] >= 'a' && input[i] <= 'z')
 		{
 			j = input[i] - 'a';
-			cout << " J : " << j << endl;
 			frequency_map[j]++;
 		}
 	}
