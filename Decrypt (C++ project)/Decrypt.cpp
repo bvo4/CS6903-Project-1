@@ -66,7 +66,6 @@ int coin_generation_algorithm(int ciphertext_pointer, int L)
 	mt19937 gen(rd());
 
 	uniform_int_distribution<> dis(0, 1);
-	cout << "RETURNING: " << dis(gen) << endl;;
 	return dis(gen);
 }
 
@@ -130,7 +129,7 @@ int main() {
 	return 0;
 }
 
-//Quick fucntion to quickly take the entire string and map the letter frequencies to the array
+//Quick function to quickly take the entire string and map the letter frequencies to the array
 void return_count(string line, int frequency_map[])
 {
 	int j = 0;
@@ -250,12 +249,15 @@ TA NOTE:
 	do {
 		if (prob_of_random_ciphertext < coin_value && coin_value <= 1)
 		{
-			cout << "Standard Encryption" << endl;
 			//set j = m[message_pointer] // j is a value between 0 and 26
 			int j = input[message_pointer];
 
+			cout << "j is : " << j << endl;
+			//Crash here because j will sometimes be a value that is outside the key's bounds
+
+
 			//set c[ciphertext_pointer] = k[j]
-			CT[ciphertext_pointer] = key[j];
+			CT[ciphertext_pointer] = key[j % key.length()];
 			message_pointer++;
 			ciphertext_pointer++;
 		}
@@ -270,7 +272,7 @@ TA NOTE:
 			ciphertext_pointer++;
 		}
 		//Until ciphertext_pointer > L + num_rand_characters
-	} while (ciphertext_pointer < (input.length() + num_rand_characters));
+	} while (ciphertext_pointer < (input.length() - 1 + num_rand_characters));
 	//Return c[1]...c[L + num_rand_characters]
 	return CT;
 
