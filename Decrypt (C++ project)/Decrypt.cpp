@@ -32,10 +32,10 @@ Since this is using the monoalphabetic substitution cipher, look at the frequenc
 */
 
 string encrypt(string input, string key);
-void define_letter_frequency(char frequency_map[]);
-char frequency_map[26];
+void define_letter_frequency(int frequency_map[]);
+int frequency_map[26];
 int decipher_key_length();
-
+void CT_FREQUENCY(string input, int frequency_map[]);
 
 //randomly choose a character c from{ <space>,a,..,z }
 char random_letter_generator()
@@ -85,13 +85,13 @@ int main() {
 	string input;
 	string output;
 	string key;
-	char frequency_map[26] = {0};
+	int frequency_map[26] = {0};
 
 
 	if (ENCRYPT)
 	{
 		//Uses a mono-alphabetic substitution cipher and attempts to decrypt it
-		define_letter_frequency(frequency_map);
+		CT_FREQUENCY("abcdefghijklmnopqrstuvwxyz", frequency_map);
 
 		/*
 		cout << "Enter plaintext " << endl;
@@ -117,8 +117,9 @@ int main() {
 	}
 }
 
+//Read the plaintext dictionary and calculate the letter frequency of all 5 candidates
 #include <fstream>
-void define_letter_frequency(char frequency_map[])
+void define_letter_frequency(int frequency_map[])
 {
 	ifstream dictionary;
 	string line;
@@ -141,6 +142,26 @@ void define_letter_frequency(char frequency_map[])
 		cout << char(i + 'a') << " : " << frequency_map[i] << endl;
 
 	dictionary.close();
+}
+
+//Same as the function above, but calculates the letter frequency of the ciphertext
+void CT_FREQUENCY(string input, int frequency_map[])
+{
+	int j = 0;
+	for (int i = 0; i < input.length(); i++)
+	{
+		if (input[i] >= 'a' && input[i] <= 'z')
+		{
+			j = input[i] - 'a';
+			cout << " J : " << j << endl;
+			frequency_map[j]++;
+		}
+	}
+
+	cout << "Frequency of our Ciphertext:  " << endl;
+	for (int i = 0; i < 26; i++)
+		cout << char(i + 'a') << " : " << frequency_map[i] << endl;
+
 }
 
 //Attempting to recreate the professor's encryption scheme from his pseudocode
