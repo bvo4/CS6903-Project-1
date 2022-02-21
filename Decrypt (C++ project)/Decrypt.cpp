@@ -247,22 +247,25 @@ TA NOTE:
 
 */
 	do {
+		if (isspace(input[message_pointer]))
+		{
+			message_pointer++;
+		}
+
 		if (prob_of_random_ciphertext < coin_value && coin_value <= 1)
 		{
 			//set j = m[message_pointer] // j is a value between 0 and 26
 			int j = input[message_pointer];
 
-			cout << "j is : " << j << endl;
-			//Crash here because j will sometimes be a value that is outside the key's bounds
-
-
 			//set c[ciphertext_pointer] = k[j]
 			CT[ciphertext_pointer] = key[j % key.length()];
+
+
 			message_pointer++;
 			ciphertext_pointer++;
 		}
 
-		if (0 <= coin_value && coin_value <= prob_of_random_ciphertext)
+		else if (0 <= coin_value && coin_value <= prob_of_random_ciphertext)
 		{
 			//randomly choose a character c from {<space>,a,..,z}
 			char c = random_letter_generator();
