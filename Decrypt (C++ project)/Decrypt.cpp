@@ -99,8 +99,8 @@ int main() {
 	if (ENCRYPT)
 	{
 		//Uses a mono-alphabetic substitution cipher and attempts to decrypt it
-		//CT_FREQUENCY("abcdefghijklmnopqrstuvwxyz", frequency_map);
-		define_letter_frequency(frequency_map);
+		CT_FREQUENCY("abcdefghijklmnopqrstuvwxyz", frequency_map);
+		//define_letter_frequency(frequency_map);
 
 		/*
 		cout << "Enter plaintext " << endl;
@@ -190,7 +190,6 @@ void define_letter_frequency(int frequency_map[])
 	}
 
 	cout << "Frequency of all alphabets in the string is:" << endl;
-
 	for (int i = 0; i < 26; i++)
 		cout << char(i + 'a') << " : " << frequency_PT5[i] << endl;
 
@@ -201,14 +200,7 @@ void define_letter_frequency(int frequency_map[])
 void CT_FREQUENCY(string input, int frequency_map[])
 {
 	int j = 0;
-	for (int i = 0; i < input.length(); i++)
-	{
-		if (input[i] >= 'a' && input[i] <= 'z')
-		{
-			j = input[i] - 'a';
-			frequency_map[j]++;
-		}
-	}
+	return_count(input, frequency_map);
 
 	cout << "Frequency of our Ciphertext:  " << endl;
 	for (int i = 0; i < 26; i++)
