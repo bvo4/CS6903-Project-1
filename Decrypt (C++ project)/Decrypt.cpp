@@ -53,7 +53,7 @@ char random_letter_generator()
 	mt19937 gen(rd());
 
 	//Choose a random letter a-z
-	uniform_int_distribution<> dis(0, 26);
+	uniform_int_distribution<> dis(0, 25);
 	return 'a' + dis(gen);
 }
 
@@ -111,7 +111,7 @@ int main() {
 
 		
 		//cout << "Enter plaintext " << endl;
-		//cin >> input;
+		//cin >> noskipws >> input;
 		string output = encrypt("underwaists wayfarings fluty analgia refuels transcribing nibbled okra buttonholer venalness hamlet praus apprisers presifted cubital walloper dissembler bunting wizardries squirrel preselect befitted licensee encumbrances proliferations tinkerer egrets recourse churl kolinskies ionospheric docents unnatural scuffler muches petulant acorns subconscious xyster tunelessly boners slag amazement intercapillary manse unsay embezzle stuccoer dissembles batwing valediction iceboxes ketchups phonily con", "secret");
 		cout << "Encrypted output:  " << output << endl;
 	}
@@ -247,10 +247,12 @@ TA NOTE:
 
 */
 	do {
-		cout << "input #" << message_pointer << " : " << input[message_pointer] << endl;
+		//cout << "input #" << message_pointer << " : " << input[message_pointer] << endl;
 		if (isspace(input[message_pointer]))
 		{
 			message_pointer++;
+			CT[ciphertext_pointer] = ' ';
+			ciphertext_pointer++;
 		}
 
 		else if (prob_of_random_ciphertext < coin_value && coin_value <= 1)
@@ -261,7 +263,6 @@ TA NOTE:
 			//set c[ciphertext_pointer] = k[j]
 			CT[ciphertext_pointer] = key[j % key.length()];
 
-
 			message_pointer++;
 			ciphertext_pointer++;
 		}
@@ -270,7 +271,6 @@ TA NOTE:
 		{
 			//randomly choose a character c from {<space>,a,..,z}
 			char c = random_letter_generator();
-
 			//set c[ciphertext_pointer] = c
 			CT[ciphertext_pointer] = c;
 			ciphertext_pointer++;
@@ -278,6 +278,7 @@ TA NOTE:
 		//Until ciphertext_pointer > L + num_rand_characters
 	} while (ciphertext_pointer < (input.length() - 1 + num_rand_characters) && message_pointer < 500);
 	//Return c[1]...c[L + num_rand_characters]
+	cout << "CIPHERTEXT: " << CT << endl;
 	return CT;
 
 }
