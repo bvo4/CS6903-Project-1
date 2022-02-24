@@ -53,7 +53,11 @@ char random_letter_generator()
 	mt19937 gen(rd());
 
 	//Choose a random letter a-z
-	uniform_int_distribution<> dis(0, 25);
+	uniform_int_distribution<> dis(0, 26);
+	int random_number = dis(gen);
+	if (random_number == 26)
+		return ' ';
+
 	return 'a' + dis(gen);
 }
 
