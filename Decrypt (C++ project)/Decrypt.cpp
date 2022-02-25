@@ -55,10 +55,10 @@ char random_letter_generator()
 	//Choose a random letter a-z
 	uniform_int_distribution<> dis(0, 26);
 	int random_number = dis(gen);
-	if (random_number == 26)
+	if (random_number >= 26)
 		return ' ';
 
-	return 'a' + dis(gen);
+	return char('a' + random_number);
 }
 
 
@@ -116,7 +116,9 @@ int main() {
 		
 		//cout << "Enter plaintext " << endl;
 		//cin >> noskipws >> input;
-		string output = encrypt("underwaists wayfarings fluty analgia refuels transcribing nibbled okra buttonholer venalness hamlet praus apprisers presifted cubital walloper dissembler bunting wizardries squirrel preselect befitted licensee encumbrances proliferations tinkerer egrets recourse churl kolinskies ionospheric docents unnatural scuffler muches petulant acorns subconscious xyster tunelessly boners slag amazement intercapillary manse unsay embezzle stuccoer dissembles batwing valediction iceboxes ketchups phonily con", "secret");
+		input = "underwaists wayfarings fluty analgia refuels transcribing nibbled okra buttonholer venalness hamlet praus apprisers presifted cubital walloper dissembler bunting wizardries squirrel preselect befitted licensee encumbrances proliferations tinkerer egrets recourse churl kolinskies ionospheric docents unnatural scuffler muches petulant acorns subconscious xyster tunelessly boners slag amazement intercapillary manse unsay embezzle stuccoer dissembles batwing valediction iceboxes ketchups phonily con";
+		cout << "Our input is:  " << input << endl << endl;
+		string output = encrypt(input, "secret");
 		cout << "Encrypted output:  " << output << endl;
 	}
 	else
@@ -252,14 +254,9 @@ TA NOTE:
 */
 	do {
 		//cout << "input #" << message_pointer << " : " << input[message_pointer] << endl;
-		if (isspace(input[message_pointer]))
-		{
-			message_pointer++;
-			CT[ciphertext_pointer] = ' ';
-			ciphertext_pointer++;
-		}
 
-		else if (prob_of_random_ciphertext < coin_value && coin_value <= 1)
+
+		if (prob_of_random_ciphertext < coin_value && coin_value <= 1)
 		{
 			//set j = m[message_pointer] // j is a value between 0 and 26
 			int j = input[message_pointer];
@@ -279,10 +276,10 @@ TA NOTE:
 			CT[ciphertext_pointer] = c;
 			ciphertext_pointer++;
 		}
+		cout << "Ciphertext pointer:  " << ciphertext_pointer-1 << " : " << CT[ciphertext_pointer - 1] << endl;
 		//Until ciphertext_pointer > L + num_rand_characters
 	} while (ciphertext_pointer < (input.length() - 1 + num_rand_characters) && message_pointer < 500);
 	//Return c[1]...c[L + num_rand_characters]
-	cout << "CIPHERTEXT: " << CT << endl;
 	return CT;
 
 }
