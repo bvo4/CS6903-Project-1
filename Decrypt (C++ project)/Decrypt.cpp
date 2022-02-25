@@ -118,7 +118,7 @@ int main() {
 		//cin >> noskipws >> input;
 		input = "underwaists wayfarings fluty analgia refuels transcribing nibbled okra buttonholer venalness hamlet praus apprisers presifted cubital walloper dissembler bunting wizardries squirrel preselect befitted licensee encumbrances proliferations tinkerer egrets recourse churl kolinskies ionospheric docents unnatural scuffler muches petulant acorns subconscious xyster tunelessly boners slag amazement intercapillary manse unsay embezzle stuccoer dissembles batwing valediction iceboxes ketchups phonily con";
 		cout << "Our input is:  " << input << endl << endl;
-		string output = encrypt(input, "secret");
+		output = encrypt(input, "secret");
 		cout << "Encrypted output:  " << output << endl;
 	}
 	else
@@ -276,10 +276,12 @@ TA NOTE:
 			CT[ciphertext_pointer] = c;
 			ciphertext_pointer++;
 		}
-		cout << "Ciphertext pointer:  " << ciphertext_pointer-1 << " : " << CT[ciphertext_pointer - 1] << endl;
 		//Until ciphertext_pointer > L + num_rand_characters
 	} while (ciphertext_pointer < (input.length() - 1 + num_rand_characters) && message_pointer < 500);
 	//Return c[1]...c[L + num_rand_characters]
-	return CT;
+	
+	//Forcibly turncating to length 500 for now
+	//NEED TO REMOVE THIS LATER WHEN ACTUAL PRACTICE IS USED
+	return string(CT).substr(0, 499);
 
 }
