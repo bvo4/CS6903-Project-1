@@ -207,10 +207,12 @@ void define_letter_frequency(int frequency_map[])
 
 	}
 
+	/*
 	cout << "Frequency of all alphabets in the string is:" << endl;
 	for (int i = 0; i < 27; i++)
 		cout << char(i + 'a') << " : " << frequency_PT5[i] << endl;
 	cout << "_" << " : " << frequency_PT5[26] << endl;
+	*/
 
 	dictionary.close();
 }
@@ -221,10 +223,13 @@ void CT_FREQUENCY(string input, int frequency_map[])
 	int j = 0;
 	return_count(input, frequency_map);
 
+	//Counts the frequencies
+	/*
 	cout << "Frequency of our Ciphertext:  " << endl;
 	for (int i = 0; i < 26; i++)
 		cout << char(i + 'a') << " : " << frequency_map[i] << endl;
-
+	cout << "_" << " : " << frequency_map[26] << endl;
+	*/
 }
 
 //Attempting to recreate the professor's encryption scheme from his pseudocode
