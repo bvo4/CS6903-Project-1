@@ -33,7 +33,6 @@ Since this is using the monoalphabetic substitution cipher, look at the frequenc
 
 string encrypt(string input, string key);
 void define_letter_frequency(int frequency_map[]);
-int frequency_map[26];
 
 /* The frequency mappings for plaintext #1 - #5 */
 int frequency_PT1[27] = {0};
@@ -80,14 +79,8 @@ int coin_generation_algorithm(int ciphertext_pointer, int L)
 /* Part 1 will involve a known-plaintext attack since we're using a plaintext dictionary to decrypt ciphertext */
 string decryption_scheme(string input, string k) {
 	/* The different parameters */
-	int L = 500;		//Length of message
-	int u = 5;			
-	int v = 50;
-	int t = 5;		//Between 1 and 24
 
-
-
-	int frequency_map[26] = { 0 };	//We will be using this to map out the letter frequency of the ciphertext
+	int frequency_map[27] = { 0 };	//We will be using this to map out the letter frequency of the ciphertext
 	string output;
 	int j = 0;
 
@@ -98,8 +91,7 @@ string decryption_scheme(string input, string k) {
 	CT_FREQUENCY(input, frequency_map);
 
 
-
-	return output;
+	return "PLACEHOLDER";
 
 }
 
@@ -224,17 +216,17 @@ void define_letter_frequency(int frequency_map[])
 //Same as the function above, but calculates the letter frequency of the ciphertext
 void CT_FREQUENCY(string input, int frequency_map[])
 {
-	int j = 0;
 	return_count(input, frequency_map);
 
-	//Counts the frequencies
-	/*
+	
 	cout << "Frequency of our Ciphertext:  " << endl;
 	for (int i = 0; i < 26; i++)
 		cout << char(i + 'a') << " : " << frequency_map[i] << endl;
 	cout << "_" << " : " << frequency_map[26] << endl;
-	*/
+	
 }
+
+
 
 //Attempting to recreate the professor's encryption scheme from his pseudocode
 	/*
