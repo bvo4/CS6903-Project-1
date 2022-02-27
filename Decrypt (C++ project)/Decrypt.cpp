@@ -36,11 +36,11 @@ void define_letter_frequency(int frequency_map[]);
 int frequency_map[26];
 
 /* The frequency mappings for plaintext #1 - #5 */
-int frequency_PT1[26] = {0};
-int frequency_PT2[26] = {0};
-int frequency_PT3[26] = {0};
-int frequency_PT4[26] = {0};
-int frequency_PT5[26] = {0};
+int frequency_PT1[27] = {0};
+int frequency_PT2[27] = {0};
+int frequency_PT3[27] = {0};
+int frequency_PT4[27] = {0};
+int frequency_PT5[27] = {0};
 
 int decipher_key_length();
 void CT_FREQUENCY(string input, int frequency_map[]);
@@ -73,6 +73,10 @@ int coin_generation_algorithm(int ciphertext_pointer, int L)
 	return dis(gen);
 }
 
+	/*
+	* Key Length is at most 24
+	* Message length is at most 24
+	*/
 /* Part 1 will involve a known-plaintext attack since we're using a plaintext dictionary to decrypt ciphertext */
 string decryption_scheme(string input, string k) {
 	/* The different parameters */
@@ -81,12 +85,11 @@ string decryption_scheme(string input, string k) {
 	int v = 50;
 	int t = 5;		//Between 1 and 24
 
+
+
+	int frequency_map[26] = { 0 };	//We will be using this to map out the letter frequency of the ciphertext
 	string output;
 	int j = 0;
-	/*
-	* Key Length is at most 24
-	* Message length is at most 24
-	*/
 
 	/* First, we will begin by acquiring the letter frequency of the ciphertext and the 5 plaintext candidates */
 	define_letter_frequency(frequency_map);
@@ -108,7 +111,6 @@ int main() {
 	string input;
 	string output;
 	string key;
-	int frequency_map[26] = {0};
 
 
 	if (ENCRYPT)
@@ -153,6 +155,8 @@ void return_count(string line, int frequency_map[])
 			j = line[i] - 'a';
 			frequency_map[j]++;
 		}
+		else if (line[i] == ' ')
+			frequency_map[26]++;
 	}
 }
 
@@ -204,8 +208,9 @@ void define_letter_frequency(int frequency_map[])
 	}
 
 	cout << "Frequency of all alphabets in the string is:" << endl;
-	for (int i = 0; i < 26; i++)
+	for (int i = 0; i < 27; i++)
 		cout << char(i + 'a') << " : " << frequency_PT5[i] << endl;
+	cout << "_" << " : " << frequency_PT5[26] << endl;
 
 	dictionary.close();
 }
