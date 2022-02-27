@@ -1,9 +1,21 @@
-#include<random>
-#include<math.h>
+#include "encrypt.h"
 
 using namespace std;
 
-char random_letter_generator()
+
+// coin_value is a real number in [0,1]
+int encryption::coin_generation_algorithm(int ciphertext_pointer, int L)
+{
+	// Initialize Mersenne Twister pseudo-random number generator
+	random_device rd;
+	mt19937 gen(rd());
+
+	uniform_int_distribution<> dis(0, 1);
+	return dis(gen);
+}
+
+//randomly choose a character c from{ <space>,a,..,z }
+char encryption::random_letter_generator()
 {
 	// Initialize Mersenne Twister pseudo-random number generator
 	random_device rd;
@@ -17,34 +29,7 @@ char random_letter_generator()
 
 	return char('a' + random_number);
 }
-
-// coin_value is a real number in [0,1]
-int coin_generation_algorithm(int ciphertext_pointer, int L)
-{
-	// Initialize Mersenne Twister pseudo-random number generator
-	random_device rd;
-	mt19937 gen(rd());
-
-	uniform_int_distribution<> dis(0, 1);
-	return dis(gen);
-}
-
-//Attempting to recreate the professor's encryption scheme from his pseudocode
-	/*
-		Repeat
-			let coin_value = coin_generation_algorithm(ciphertext_pointer,L)  // coin_value is a real number in [0,1]
-			if prob_of_random_ciphertext < coin_value <= 1 then
-			set j = m[message_pointer] // j is a value between 0 and 26
-			set c[ciphertext_pointer] = k[j]  
-			message_pointer = message_pointer + 1
-			if 0 <= coin_value <= prob_of_random_ciphertext then
-			randomly choose a character c from {<space>,a,..,z}
-			set c[ciphertext_pointer] = c
-			num_rand_characters = num_rand_characters + 1
-			ciphertext_pointer = ciphertext_pointer +1   
-		Until ciphertext_pointer > L + num_rand_characters
-	*/
-string encrypt(string input, string key)
+string encryption::encrypt(std::string input, std::string key)
 {
 	int ciphertext_pointer = 0;
 	int message_pointer = 0;
@@ -93,9 +78,8 @@ TA NOTE:
 		//Until ciphertext_pointer > L + num_rand_characters
 	} while (ciphertext_pointer < (input.length() - 1 + num_rand_characters) && message_pointer < 500);
 	//Return c[1]...c[L + num_rand_characters]
-	
+
 	//Forcibly turncating to length 500 for now
 	//NEED TO REMOVE THIS LATER WHEN ACTUAL PRACTICE IS USED
-	return string(CT).substr(0, 499);
-
+	return std::string(CT).substr(0, 499);
 }
