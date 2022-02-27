@@ -88,6 +88,10 @@ string decryption_scheme(string input, string k) {
 	* Message length is at most 24
 	*/
 
+	/* First, we will begin by acquiring the letter frequency of the ciphertext and the 5 plaintext candidates */
+	define_letter_frequency(frequency_map);
+
+
 	return output;
 
 }
@@ -114,12 +118,15 @@ int main() {
 		//define_letter_frequency(frequency_map);
 
 		
-		//cout << "Enter plaintext " << endl;
-		//cin >> noskipws >> input;
+		/* Use our encryption pseudocode to encode plaintext into ciphertext */
 		input = "underwaists wayfarings fluty analgia refuels transcribing nibbled okra buttonholer venalness hamlet praus apprisers presifted cubital walloper dissembler bunting wizardries squirrel preselect befitted licensee encumbrances proliferations tinkerer egrets recourse churl kolinskies ionospheric docents unnatural scuffler muches petulant acorns subconscious xyster tunelessly boners slag amazement intercapillary manse unsay embezzle stuccoer dissembles batwing valediction iceboxes ketchups phonily con";
 		cout << "Our input is:  " << input << endl << endl;
-		output = encrypt(input, "secret");
-		cout << "Encrypted output:  " << output << endl;
+		input = encrypt(input, "secret");
+		cout << "Encrypted output:  " << input << endl;
+
+		/* Use our Ciphertext to decrypt the plaintexxt and figure out the plaintext */
+		cout << "Now inputting the ciphertext into the decryption algorithm" << endl;
+		output = decryption_scheme(input, key);
 	}
 	else
 	{
