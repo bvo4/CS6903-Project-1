@@ -94,6 +94,10 @@ string decryption_scheme(string input, string k) {
 	/* First, we will begin by acquiring the letter frequency of the ciphertext and the 5 plaintext candidates */
 	define_letter_frequency(frequency_map);
 
+	//Define the CT letter frequency
+	CT_FREQUENCY(input, frequency_map);
+
+
 
 	return output;
 
