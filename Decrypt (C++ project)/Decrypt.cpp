@@ -218,7 +218,6 @@ void CT_FREQUENCY(string input, int frequency_map[])
 {
 	return_count(input, frequency_map);
 
-	
 	cout << "Frequency of our Ciphertext:  " << endl;
 	for (int i = 0; i < 26; i++)
 		cout << char(i + 'a') << " : " << frequency_map[i] << endl;
