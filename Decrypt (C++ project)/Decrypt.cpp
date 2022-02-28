@@ -38,6 +38,7 @@ int frequency_PT5[27] = { 0 };
 
 int decipher_key_length();
 void CT_FREQUENCY(string input, int frequency_map[]);
+void Compare_Frequency(int frequency_map[]);
 
 //randomly choose a character c from{ <space>,a,..,z }
 char random_letter_generator()
@@ -85,6 +86,8 @@ string decryption_scheme(string input, string k) {
 	//Define the CT letter frequency
 	CT_FREQUENCY(input, frequency_map);
 
+	//Compare letter frequencies
+
 
 	return "PLACEHOLDER";
 
@@ -102,7 +105,6 @@ int main() {
 	string input;
 	string output;
 	string key;
-
 
 	if (ENCRYPT)
 	{
@@ -150,6 +152,8 @@ void return_count(string line, int frequency_map[])
 			frequency_map[26]++;
 	}
 }
+
+
 
 //Read the plaintext dictionary and calculate the letter frequency of all 5 candidates
 #include <fstream>
@@ -213,15 +217,40 @@ void CT_FREQUENCY(string input, int frequency_map[])
 {
 	return_count(input, frequency_map);
 
-
+	/*
 	cout << "Frequency of our Ciphertext:  " << endl;
 	for (int i = 0; i < 26; i++)
 		cout << char(i + 'a') << " : " << frequency_map[i] << endl;
 	cout << "_" << " : " << frequency_map[26] << endl;
-
+	*/
 }
 
+//  chi = SUM[i = 1 to k] ( f[i] * f'[i] ) / ( n * n' )
+float chi_square(int freq)
+{
+	float chi = 0;
+	int sum = 0;
+	for (int i = 0; i < k; i++)
+	{
+		sum += f[i] * f'[i]'
+	}
+}
 
+/* Compare the letter frequencies of all plaintext messages with the ciphertext to see which plaintext password has the closest match */
+void Compare_Frequency(int frequency_map[])
+{
+	//Will count votes for each of the 5 plaintext messages
+	int weight[5] = { 0 };
+
+	//For each letter, find the top 5 corresponding letters for each plaintext candidates to find the closest match.
+	int i, coincidence, max = 0;
+
+	//We will use the chi test to determine which plaintext candidate is the best match.
+	while (true)
+	{
+		if(frequency_map[i])
+	}
+}
 
 //Attempting to recreate the professor's encryption scheme from his pseudocode
 	/*
