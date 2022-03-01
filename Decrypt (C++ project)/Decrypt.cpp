@@ -225,6 +225,7 @@ void CT_FREQUENCY(string input, int frequency_map[])
 	*/
 }
 
+//Use the Chi Square probability to determine the probability of having a match
 //  chi = SUM[i = 1 to k] ( f[i] * f'[i] ) / ( n * n' )
 float chi_square(int freq)
 {
