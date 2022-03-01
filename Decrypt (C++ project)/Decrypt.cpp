@@ -1,3 +1,4 @@
+#include<algorithm>
 #include<iostream>
 #include<string>
 #include<vector>
@@ -56,7 +57,6 @@ char random_letter_generator()
 	return char('a' + random_number);
 }
 
-
 // coin_value is a real number in [0,1]
 int coin_generation_algorithm(int ciphertext_pointer, int L)
 {
@@ -100,11 +100,34 @@ int decipher_key_length()
 	return key_length;
 }
 
+/*
+  Generate key for encryption
+
+  The key is a sequence of 27 distinct numbers between 0 and 26
+
+  :returns key: random permutation of distinct numbers from 0 to 26
+ */
+string key_gen()
+{
+    int key_length = 26;
+    string key = " "; // include space as first character
+    for (int i = 0; i < key_length; ++i)
+    {
+        key += 'a' + i; //append all other alphabetic characters (lower-case only)
+    }
+    
+    // shuffle key randomly
+    std::random_device rd;
+    mt19937 gen = mt19937{rd()};
+    std::shuffle(key.begin(), key.end(), gen);
+    return key;
+}
+
 int main() {
 
 	string input;
 	string output;
-	string key;
+	string key = key_gen();
 
 	if (ENCRYPT)
 	{
@@ -116,7 +139,8 @@ int main() {
 		/* Use our encryption pseudocode to encode plaintext into ciphertext */
 		input = "underwaists wayfarings fluty analgia refuels transcribing nibbled okra buttonholer venalness hamlet praus apprisers presifted cubital walloper dissembler bunting wizardries squirrel preselect befitted licensee encumbrances proliferations tinkerer egrets recourse churl kolinskies ionospheric docents unnatural scuffler muches petulant acorns subconscious xyster tunelessly boners slag amazement intercapillary manse unsay embezzle stuccoer dissembles batwing valediction iceboxes ketchups phonily con";
 		cout << "Our input is:  " << input << endl << endl;
-		input = encrypt(input, "secret");
+        cout << "Key: " << key << endl << endl;
+        input = encrypt(input, key);
 		cout << "Encrypted output:  " << input << endl;
 
 		/* Use our Ciphertext to decrypt the plaintexxt and figure out the plaintext */
@@ -226,15 +250,15 @@ void CT_FREQUENCY(string input, int frequency_map[])
 }
 
 //  chi = SUM[i = 1 to k] ( f[i] * f'[i] ) / ( n * n' )
-float chi_square(int freq)
-{
-	float chi = 0;
-	int sum = 0;
-	for (int i = 0; i < k; i++)
-	{
-		sum += f[i] * f'[i]'
-	}
-}
+//float chi_square(int freq)
+//{
+//	float chi = 0;
+//	int sum = 0;
+//	for (int i = 0; i < k; i++)
+//	{
+//		sum += f[i] * f'[i]'
+//	}
+//}
 
 /* Compare the letter frequencies of all plaintext messages with the ciphertext to see which plaintext password has the closest match */
 void Compare_Frequency(int frequency_map[])
@@ -248,7 +272,7 @@ void Compare_Frequency(int frequency_map[])
 	//We will use the chi test to determine which plaintext candidate is the best match.
 	while (true)
 	{
-		if(frequency_map[i])
+		if(frequency_map[i]){}
 	}
 }
 
