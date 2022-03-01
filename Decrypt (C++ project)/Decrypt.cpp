@@ -7,6 +7,8 @@
 #include<time.h>
 #include<math.h>
 
+#include "encrypt.h"
+
 #define ENCRYPT true
 
 using namespace std;
@@ -26,7 +28,6 @@ Since this is using the monoalphabetic substitution cipher, look at the frequenc
  BEGIN WITH PROB OF RANDOM CHARACTER = 0 THEN INCREASE THE PROBABILITY
 */
 
-string encrypt(string input, string key);
 void define_letter_frequency(int frequency_map[]);
 
 /* The frequency mappings for plaintext #1 - #5 */
@@ -40,39 +41,13 @@ int decipher_key_length();
 void CT_FREQUENCY(string input, int frequency_map[]);
 void Compare_Frequency(int frequency_map[]);
 
-//randomly choose a character c from{ <space>,a,..,z }
-char random_letter_generator()
-{
-	// Initialize Mersenne Twister pseudo-random number generator
-	random_device rd;
-	mt19937 gen(rd());
-
-	//Choose a random letter a-z
-	uniform_int_distribution<> dis(0, 26);
-	int random_number = dis(gen);
-	if (random_number >= 26)
-		return ' ';
-
-	return char('a' + random_number);
-}
-
-
-// coin_value is a real number in [0,1]
-int coin_generation_algorithm(int ciphertext_pointer, int L)
-{
-	// Initialize Mersenne Twister pseudo-random number generator
-	random_device rd;
-	mt19937 gen(rd());
-
-	uniform_int_distribution<> dis(0, 1);
-	return dis(gen);
-}
-
 /*
 * Key Length is at most 24
 * Message length is at most 24
 */
 /* Part 1 will involve a known-plaintext attack since we're using a plaintext dictionary to decrypt ciphertext */
+
+#include "analyze.h"
 string decryption_scheme(string input, string k) {
 	/* The different parameters */
 
@@ -87,18 +62,12 @@ string decryption_scheme(string input, string k) {
 	CT_FREQUENCY(input, frequency_map);
 
 	//Compare letter frequencies
-
+	
 
 	return "PLACEHOLDER";
 
 }
 
-//Must begin by figuring out how long the key length might be
-int decipher_key_length()
-{
-	int key_length = 0;
-	return key_length;
-}
 
 int main() {
 
@@ -231,10 +200,15 @@ float chi_square(int freq)
 {
 	float chi = 0;
 	int sum = 0;
+
+	/*
 	for (int i = 0; i < k; i++)
 	{
 		sum += f[i] * f'[i]'
 	}
+	*/
+
+	return 0;
 }
 
 /* Compare the letter frequencies of all plaintext messages with the ciphertext to see which plaintext password has the closest match */
@@ -247,9 +221,9 @@ void Compare_Frequency(int frequency_map[])
 	int i, coincidence, max = 0;
 
 	//We will use the chi test to determine which plaintext candidate is the best match.
-	while (true)
+	//while (true)
 	{
-		if(frequency_map[i])
+	//	if(frequency_map[i])
 	}
 }
 
@@ -268,56 +242,3 @@ void Compare_Frequency(int frequency_map[])
 			ciphertext_pointer = ciphertext_pointer +1
 		Until ciphertext_pointer > L + num_rand_characters
 	*/
-string encrypt(string input, string key)
-{
-	int ciphertext_pointer = 0;
-	int message_pointer = 0;
-	int num_rand_characters = 0;
-	int prob_of_random_ciphertext = 0;
-	char CT[500];
-
-	int coin_value = coin_generation_algorithm(ciphertext_pointer, input.length());  // coin_value is a real number in [0,1]
-
-/*
-TA NOTE:
-	abc  = plain text
-	abc = KEY
-	pt pointer is at a
-	flip a coin. if 0<=value<=prob of random ciphertextncy
-	insert random char
-	else
-	encrypt pt a with char a from the key
-*/
-	do {
-		//cout << "input #" << message_pointer << " : " << input[message_pointer] << endl;
-
-
-		if (prob_of_random_ciphertext < coin_value && coin_value <= 1)
-		{
-			//set j = m[message_pointer] // j is a value between 0 and 26
-			int j = input[message_pointer];
-
-			//set c[ciphertext_pointer] = k[j]
-			CT[ciphertext_pointer] = key[j % key.length()];
-
-			message_pointer++;
-			ciphertext_pointer++;
-		}
-
-		else if (0 <= coin_value && coin_value <= prob_of_random_ciphertext)
-		{
-			//randomly choose a character c from {<space>,a,..,z}
-			char c = random_letter_generator();
-			//set c[ciphertext_pointer] = c
-			CT[ciphertext_pointer] = c;
-			ciphertext_pointer++;
-		}
-		//Until ciphertext_pointer > L + num_rand_characters
-	} while (ciphertext_pointer < (input.length() - 1 + num_rand_characters) && message_pointer < 500);
-	//Return c[1]...c[L + num_rand_characters]
-
-	//Forcibly turncating to length 500 for now
-	//NEED TO REMOVE THIS LATER WHEN ACTUAL PRACTICE IS USED
-	return string(CT).substr(0, 499);
-
-}
