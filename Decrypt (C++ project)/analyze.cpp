@@ -9,19 +9,27 @@ int decipher_key_length()
 
 //Use the Chi Square probability to determine the probability of having a match
 //  chi = SUM[i = 1 to k] ( f[i] * f'[i] ) / ( n * n' )
-float chi_square(int freq)
+
+/*
+Where k is the number of distinct letters in the alphabet, 
+f is the number of times the i'th letter appears in the first string and f' is the number of times the i'th letter appears in the second string. 
+And n and n' are the total number of characters in the first and second strings.
+*/
+float chi_square(int freq, int frequency_map[], int frequency_PT[])
 {
 	float chi = 0;
 	int sum = 0;
+	int k = 27;
+	int n = 500;		//Length of first string
+	int n2 = 500;		//Length of second string
 
-	/*
 	for (int i = 0; i < k; i++)
 	{
-		sum += f[i] * f'[i]'
+			sum += (frequency_map[i] * frequency_PT[i]) / (n/n2);
 	}
-	*/
+	
 
-	return 0;
+	return sum;
 }
 
 //Quick function to quickly take the entire string and map the letter frequencies to the array

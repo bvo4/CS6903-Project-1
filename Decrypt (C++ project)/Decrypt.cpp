@@ -58,6 +58,7 @@ string decryption_scheme(string input, string k) {
 	CT_FREQUENCY(input, frequency_map);
 
 	//Compare letter frequencies
+	Compare_Frequency(frequency_map);
 
 	return "PLACEHOLDER";
 }
@@ -96,7 +97,9 @@ int main() {
 	return 0;
 }
 
-/* Compare the letter frequencies of all plaintext messages with the ciphertext to see which plaintext password has the closest match */
+/* Compare the letter frequencies of all plaintext messages with the ciphertext to see which plaintext password has the closest match
+https://www.tapatalk.com/groups/crypto/the-index-of-coincidence-the-chi-test-the-kappa-t238.html
+*/
 void Compare_Frequency(int frequency_map[])
 {
 	//Will count votes for each of the 5 plaintext messages
@@ -106,10 +109,7 @@ void Compare_Frequency(int frequency_map[])
 	int i, coincidence, max = 0;
 
 	//We will use the chi test to determine which plaintext candidate is the best match.
-	//while (true)
-	{
-		//if(frequency_map[i])
-	}
+	cout << "Chi Square of : " << chi_square(0, frequency_map, frequency_PT1) << endl;
 }
 
 //Attempting to recreate the professor's encryption scheme from his pseudocode
