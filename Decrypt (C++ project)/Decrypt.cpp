@@ -1,12 +1,12 @@
 #include<iostream>
 #include<string>
 #include<vector>
-#include<random>
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
 #include<math.h>
 
+#include "analyze.h"
 #include "encrypt.h"
 
 #define ENCRYPT true
@@ -47,7 +47,6 @@ void Compare_Frequency(int frequency_map[]);
 */
 /* Part 1 will involve a known-plaintext attack since we're using a plaintext dictionary to decrypt ciphertext */
 
-#include "analyze.h"
 string decryption_scheme(string input, string k) {
 	/* The different parameters */
 
@@ -67,7 +66,6 @@ string decryption_scheme(string input, string k) {
 	return "PLACEHOLDER";
 
 }
-
 
 int main() {
 
@@ -121,7 +119,6 @@ void return_count(string line, int frequency_map[])
 			frequency_map[26]++;
 	}
 }
-
 
 
 //Read the plaintext dictionary and calculate the letter frequency of all 5 candidates
