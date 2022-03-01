@@ -52,3 +52,58 @@ void CT_FREQUENCY(string input, int frequency_map[])
 	cout << "_" << " : " << frequency_map[26] << endl;
 	*/
 }
+
+void define_letter_frequency(int frequency_PT1[], int frequency_PT2[], int frequency_PT3[], int frequency_PT4[], int frequency_PT5[])
+{
+	ifstream dictionary;
+	string line;
+	dictionary.open("../../dictionary_1.txt");
+
+	while (getline(dictionary, line))
+	{
+		if (line == "Candidate Plaintext #1")
+		{
+			//Skip the blank line to reach the candidate plaintext
+			getline(dictionary, line); getline(dictionary, line);
+			return_count(line, frequency_PT1);
+		}
+
+		else if (line == "Candidate Plaintext #2")
+		{
+			//Skip the blank line to reach the candidate plaintext
+			getline(dictionary, line); getline(dictionary, line);
+			return_count(line, frequency_PT2);
+		}
+
+		else if (line == "Candidate Plaintext #3")
+		{
+			//Skip the blank line to reach the candidate plaintext
+			getline(dictionary, line); getline(dictionary, line);
+			return_count(line, frequency_PT3);
+		}
+
+		else if (line == "Candidate Plaintext #4")
+		{
+			//Skip the blank line to reach the candidate plaintext
+			getline(dictionary, line); getline(dictionary, line);
+			return_count(line, frequency_PT4);
+		}
+
+		else if (line == "Candidate Plaintext #5")
+		{
+			//Skip the blank line to reach the candidate plaintext
+			getline(dictionary, line); getline(dictionary, line);
+			return_count(line, frequency_PT5);
+		}
+
+	}
+
+	/*
+	cout << "Frequency of all alphabets in the string is:" << endl;
+	for (int i = 0; i < 27; i++)
+		cout << char(i + 'a') << " : " << frequency_PT5[i] << endl;
+	cout << "_" << " : " << frequency_PT5[26] << endl;
+	*/
+
+	dictionary.close();
+}
