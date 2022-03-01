@@ -36,7 +36,6 @@ string encrypt(string input, string key)
 	int num_rand_characters = 0;
 	int prob_of_random_ciphertext = 0;
 	char CT[500];
-
 	int coin_value = coin_generation_algorithm(ciphertext_pointer, input.length());  // coin_value is a real number in [0,1]
 
 /*
@@ -80,5 +79,4 @@ TA NOTE:
 	//Forcibly turncating to length 500 for now
 	//NEED TO REMOVE THIS LATER WHEN ACTUAL PRACTICE IS USED
 	return string(CT).substr(0, 499);
-
 }
