@@ -298,7 +298,6 @@ string encrypt(string input, string key)
 	int num_rand_characters = 0;
 	int prob_of_random_ciphertext = 0;
     vector<char> CT;
-	//char CT[500];
 
 
 /*
