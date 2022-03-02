@@ -2,11 +2,13 @@
 #include<iostream>
 #include<string>
 #include<vector>
-#include<random>
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
 #include<math.h>
+
+#include "analyze.h"
+#include "encrypt.h"
 
 #define ENCRYPT true
 
@@ -27,9 +29,6 @@ Since this is using the monoalphabetic substitution cipher, look at the frequenc
  BEGIN WITH PROB OF RANDOM CHARACTER = 0 THEN INCREASE THE PROBABILITY
 */
 
-string encrypt(string input, string key);
-void define_letter_frequency(int frequency_map[]);
-
 /* The frequency mappings for plaintext #1 - #5 */
 int frequency_PT1[27] = { 0 };
 int frequency_PT2[27] = { 0 };
@@ -37,9 +36,8 @@ int frequency_PT3[27] = { 0 };
 int frequency_PT4[27] = { 0 };
 int frequency_PT5[27] = { 0 };
 
-int decipher_key_length();
-void CT_FREQUENCY(string input, int frequency_map[]);
 void Compare_Frequency(int frequency_map[]);
+
 
 //randomly choose a character c from{ <space>,a,..,z }
 char random_letter_generator()
@@ -73,6 +71,7 @@ double coin_generation_algorithm(int ciphertext_pointer, int L)
 * Message length is at most 24
 */
 /* Part 1 will involve a known-plaintext attack since we're using a plaintext dictionary to decrypt ciphertext */
+
 string decryption_scheme(string input, string k) {
 	/* The different parameters */
 
@@ -81,23 +80,15 @@ string decryption_scheme(string input, string k) {
 	int j = 0;
 
 	/* First, we will begin by acquiring the letter frequency of the ciphertext and the 5 plaintext candidates */
-	define_letter_frequency(frequency_map);
+	define_letter_frequency(frequency_PT1, frequency_PT2, frequency_PT3, frequency_PT4, frequency_PT5);
 
 	//Define the CT letter frequency
 	CT_FREQUENCY(input, frequency_map);
 
 	//Compare letter frequencies
-
+	Compare_Frequency(frequency_map);
 
 	return "PLACEHOLDER";
-
-}
-
-//Must begin by figuring out how long the key length might be
-int decipher_key_length()
-{
-	int key_length = 0;
-	return key_length;
 }
 
 /*
@@ -132,9 +123,6 @@ int main() {
 	if (ENCRYPT)
 	{
 		//Uses a mono-alphabetic substitution cipher and attempts to decrypt it
-		//CT_FREQUENCY("abcdefghijklmnopqrstuvwxyz", frequency_map);
-		//define_letter_frequency(frequency_map);
-
 
 		/* Use our encryption pseudocode to encode plaintext into ciphertext */
 		input = "underwaists wayfarings fluty analgia refuels transcribing nibbled okra buttonholer venalness hamlet praus apprisers presifted cubital walloper dissembler bunting wizardries squirrel preselect befitted licensee encumbrances proliferations tinkerer egrets recourse churl kolinskies ionospheric docents unnatural scuffler muches petulant acorns subconscious xyster tunelessly boners slag amazement intercapillary manse unsay embezzle stuccoer dissembles batwing valediction iceboxes ketchups phonily con";
@@ -160,6 +148,7 @@ int main() {
 
 	return 0;
 }
+
 
 //Quick function to quickly take the entire string and map the letter frequencies to the array
 void return_count(string line, int frequency_map[])
@@ -250,17 +239,19 @@ void CT_FREQUENCY(string input, int frequency_map[])
 }
 
 //  chi = SUM[i = 1 to k] ( f[i] * f'[i] ) / ( n * n' )
-//float chi_square(int freq)
-//{
-//	float chi = 0;
-//	int sum = 0;
-//	for (int i = 0; i < k; i++)
-//	{
-//		sum += f[i] * f'[i]'
-//	}
-//}
-
-/* Compare the letter frequencies of all plaintext messages with the ciphertext to see which plaintext password has the closest match */
+float chi_square(int freq)
+{
+	float chi = 0;
+	int sum = 0;
+	for (int i = 0; i < k; i++)
+	{
+    ;
+    //sum += f[i] * f'[i]'
+	}
+}
+/* Compare the letter frequencies of all plaintext messages with the ciphertext to see which plaintext password has the closest match
+https://www.tapatalk.com/groups/crypto/the-index-of-coincidence-the-chi-test-the-kappa-t238.html
+*/
 void Compare_Frequency(int frequency_map[])
 {
 	//Will count votes for each of the 5 plaintext messages
@@ -270,10 +261,14 @@ void Compare_Frequency(int frequency_map[])
 	int i, coincidence, max = 0;
 
 	//We will use the chi test to determine which plaintext candidate is the best match.
+
 	while (true)
 	{
 		if(frequency_map[i]){}
 	}
+
+	cout << "Chi Square of : " << chi_square(0, frequency_map, frequency_PT1) << endl;
+
 }
 
 //Attempting to recreate the professor's encryption scheme from his pseudocode
@@ -290,6 +285,7 @@ void Compare_Frequency(int frequency_map[])
 			num_rand_characters = num_rand_characters + 1
 			ciphertext_pointer = ciphertext_pointer +1
 		Until ciphertext_pointer > L + num_rand_characters
+
 	*/
 string encrypt(string input, string key)
 {
@@ -297,7 +293,7 @@ string encrypt(string input, string key)
 	int message_pointer = 0;
 	int num_rand_characters = 0;
 	int prob_of_random_ciphertext = 0;
-    vector<char> CT;
+  vector<char> CT;
 
 
 /*
@@ -320,8 +316,8 @@ TA NOTE:
 			int j = input[message_pointer];
 
 			//set c[ciphertext_pointer] = k[j]
-            char c = key[j % key.length()];
-            CT.push_back(c);
+      char c = key[j % key.length()];
+       CT.push_back(c);
 
 			message_pointer++;
 		}
@@ -331,18 +327,16 @@ TA NOTE:
 			//randomly choose a character c from {<space>,a,..,z}
 			char c = random_letter_generator();
 			//set c[ciphertext_pointer] = c
-            CT.push_back(c);
-            num_rand_characters += 1;
+      CT.push_back(c);
+      num_rand_characters += 1;
 		}
 	} while (message_pointer < 500);
     
-	//Return c[1]...c[L + num_rand_characters]
+	  //Return c[1]...c[L + num_rand_characters]
     string ciphertext = "";
     for (int c = 0; c < CT.size(); ++c)
     {
         ciphertext += CT[c];
     }
 	return ciphertext;
-
-
 }

@@ -140,6 +140,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Decrypt.cpp"/>
+    <ClCompile Include="analyze.h"/>
+    <ClCompile Include="analyze.cpp"/>
+    <ClCompile Include="encrypt.cpp"/>
+    <ClCompile Include="encrypt.h"/>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
