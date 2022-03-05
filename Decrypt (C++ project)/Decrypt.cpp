@@ -5,6 +5,7 @@
 #include<stdlib.h>
 #include<time.h>
 #include<math.h>
+#include<vector>
 
 #include "analyze.h"
 #include "encrypt.h"
@@ -37,7 +38,11 @@ int frequency_PT5[27] = { 0 };
 
 //Changed the alphabet to their numeric portions for counting
 int possible_keys[27] = {};
-
+vector<int> p_count[27];
+vector<int> c_count[27];
+vector<int> p_position[27];
+vector<int> c_position[27];
+vector<string> known_key;
 
 void Compare_Frequency(int frequency_map[]);
 
