@@ -1,3 +1,4 @@
+#include<map>
 #include<algorithm>
 #include "encrypt.h"
 
@@ -37,7 +38,7 @@ double coin_generation_algorithm(int ciphertext_pointer, int L)
 
   :returns key: random permutation of distinct numbers from 0 to 26
  */
-string key_gen()
+map<char, char> key_gen()
 {
     int key_length = 26;
     string key = " "; // include space as first character
@@ -50,7 +51,20 @@ string key_gen()
     std::random_device rd;
     mt19937 gen = mt19937{rd()};
     std::shuffle(key.begin(), key.end(), gen);
-    return key;
+    map<char, char> key_map = { {' ', key[0]} };
+    for (int i = 0; i < key_length; i++)
+    {
+        key_map['a'+i] = key[i+1];
+    }
+    return key_map;
+}
+
+void print_key(map<char, char> key)
+{
+    for (const auto& n : key) {
+      std::cout << n.first << " = " << n.second << "; " << endl;
+    }
+    cout << endl;
 }
 
 
@@ -70,7 +84,7 @@ string key_gen()
 		Until ciphertext_pointer > L + num_rand_characters
 
 	*/
-string encrypt(string input, string key)
+string encrypt(string input, map<char, char> key)
 {
 	int ciphertext_pointer = 0;
 	int message_pointer = 0;
@@ -93,14 +107,14 @@ TA NOTE:
         double coin_value = coin_generation_algorithm(ciphertext_pointer, input.length());  // coin_value is a real number in [0,1]
 
 
-		if (prob_of_random_ciphertext < coin_value)
+		if (prob_of_random_ciphertext == 0 || prob_of_random_ciphertext < coin_value)
 		{
 			//set j = m[message_pointer] // j is a value between 0 and 26
 			int j = input[message_pointer];
 
 			//set c[ciphertext_pointer] = k[j]
-           char c = key[j % key.length()];
-           CT.push_back(c);
+            char c = key[j];
+            CT.push_back(c);
 
 			message_pointer++;
 		}
@@ -110,8 +124,8 @@ TA NOTE:
 			//randomly choose a character c from {<space>,a,..,z}
 			char c = random_letter_generator();
 			//set c[ciphertext_pointer] = c
-      CT.push_back(c);
-      num_rand_characters += 1;
+            CT.push_back(c);
+            num_rand_characters += 1;
 		}
 	} while (message_pointer < 500);
     

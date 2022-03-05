@@ -45,7 +45,7 @@ void Compare_Frequency(int frequency_map[]);
 */
 /* Part 1 will involve a known-plaintext attack since we're using a plaintext dictionary to decrypt ciphertext */
 
-string decryption_scheme(string input, string k) {
+string decryption_scheme(string input, map<char, char> key) {
 //	/* The different parameters */
 //
 //	int frequency_map[27] = { 0 };	//We will be using this to map out the letter frequency of the ciphertext
@@ -69,7 +69,7 @@ int main() {
 
 	string input;
 	string output;
-	string key = key_gen();
+	map<char, char> key = key_gen();
 
 	if (ENCRYPT)
 	{
@@ -78,11 +78,12 @@ int main() {
 		/* Use our encryption pseudocode to encode plaintext into ciphertext */
 		input = "underwaists wayfarings fluty analgia refuels transcribing nibbled okra buttonholer venalness hamlet praus apprisers presifted cubital walloper dissembler bunting wizardries squirrel preselect befitted licensee encumbrances proliferations tinkerer egrets recourse churl kolinskies ionospheric docents unnatural scuffler muches petulant acorns subconscious xyster tunelessly boners slag amazement intercapillary manse unsay embezzle stuccoer dissembles batwing valediction iceboxes ketchups phonily con";
 		cout << "Our input is:  " << input << endl << endl;
-        cout << "Key: " << key << endl << endl;
+        cout << "Key: " << endl;
+        print_key(key);
         input = encrypt(input, key);
 		cout << "Encrypted output:  " << input << endl;
 
-		/* Use our Ciphertext to decrypt the plaintexxt and figure out the plaintext */
+		///* Use our Ciphertext to decrypt the plaintexxt and figure out the plaintext */
 		cout << "Now inputting the ciphertext into the decryption algorithm" << endl;
 		output = decryption_scheme(input, key);
 	}
