@@ -1,6 +1,7 @@
 #ifndef encrypt_h
 #define encrypt_h
 
+#include<map>
 #include<iostream>
 #include<string>
 #include<random>
@@ -9,9 +10,10 @@
 using namespace std;
 
 char random_letter_generator();
-int coin_generation_algorithm(int ciphertext_pointer, int L);
-string encrypt(string input, string key);
-string generate_key(char alphabet[]);
-int random_number_generator();
+
+std::map<char, char> key_gen();
+void print_key(map<char, char> key);
+double coin_generation_algorithm(int ciphertext_pointer, int L);
+string encrypt(string input, std::map<char, char> key);
 
 #endif

@@ -47,36 +47,38 @@ vector<string> known_key;
 void Compare_Frequency(int frequency_map[]);
 
 
+
 /*
 * Key Length is at most 24
 * Message length is at most 24
 */
 /* Part 1 will involve a known-plaintext attack since we're using a plaintext dictionary to decrypt ciphertext */
 
-string decryption_scheme(string input, string k) {
-	/* The different parameters */
-
-	int frequency_map[27] = { 0 };	//We will be using this to map out the letter frequency of the ciphertext
-	string output;
-	int j = 0;
-
-	/* First, we will begin by acquiring the letter frequency of the ciphertext and the 5 plaintext candidates */
-	define_letter_frequency(frequency_PT1, frequency_PT2, frequency_PT3, frequency_PT4, frequency_PT5);
-
-	//Define the CT letter frequency
-	CT_FREQUENCY(input, frequency_map);
-
-	//Compare letter frequencies
-	Compare_Frequency(frequency_map);
-
+string decryption_scheme(string input, map<char, char> key) {
+//	/* The different parameters */
+//
+//	int frequency_map[27] = { 0 };	//We will be using this to map out the letter frequency of the ciphertext
+//	string output;
+//	int j = 0;
+//
+//	/* First, we will begin by acquiring the letter frequency of the ciphertext and the 5 plaintext candidates */
+//	define_letter_frequency(frequency_PT1, frequency_PT2, frequency_PT3, frequency_PT4, frequency_PT5);
+//
+//	//Define the CT letter frequency
+//	CT_FREQUENCY(input, frequency_map);
+//
+//	//Compare letter frequencies
+//	Compare_Frequency(frequency_map);
+//
 	return "PLACEHOLDER";
 }
+
 
 int main() {
 
 	string input;
 	string output;
-	string key;
+	map<char, char> key = key_gen();
 
 	if (ENCRYPT)
 	{
@@ -85,10 +87,12 @@ int main() {
 		/* Use our encryption pseudocode to encode plaintext into ciphertext */
 		input = "underwaists wayfarings fluty analgia refuels transcribing nibbled okra buttonholer venalness hamlet praus apprisers presifted cubital walloper dissembler bunting wizardries squirrel preselect befitted licensee encumbrances proliferations tinkerer egrets recourse churl kolinskies ionospheric docents unnatural scuffler muches petulant acorns subconscious xyster tunelessly boners slag amazement intercapillary manse unsay embezzle stuccoer dissembles batwing valediction iceboxes ketchups phonily con";
 		cout << "Our input is:  " << input << endl << endl;
-		input = encrypt(input, "secret");
+        cout << "Key: " << endl;
+        print_key(key);
+        input = encrypt(input, key);
 		cout << "Encrypted output:  " << input << endl;
 
-		/* Use our Ciphertext to decrypt the plaintexxt and figure out the plaintext */
+		///* Use our Ciphertext to decrypt the plaintexxt and figure out the plaintext */
 		cout << "Now inputting the ciphertext into the decryption algorithm" << endl;
 		output = decryption_scheme(input, key);
 	}
@@ -130,6 +134,7 @@ void Alvin_test(string e) {
 	}
 }
 
+
 /* Compare the letter frequencies of all plaintext messages with the ciphertext to see which plaintext password has the closest match
 https://www.tapatalk.com/groups/crypto/the-index-of-coincidence-the-chi-test-the-kappa-t238.html
 */
@@ -142,21 +147,13 @@ void Compare_Frequency(int frequency_map[])
 	int i, coincidence, max = 0;
 
 	//We will use the chi test to determine which plaintext candidate is the best match.
+
+	while (true)
+	{
+		if(frequency_map[i]){}
+	}
+
 	cout << "Chi Square of : " << chi_square(0, frequency_map, frequency_PT1) << endl;
+
 }
 
-//Attempting to recreate the professor's encryption scheme from his pseudocode
-	/*
-		Repeat
-			let coin_value = coin_generation_algorithm(ciphertext_pointer,L)  // coin_value is a real number in [0,1]
-			if prob_of_random_ciphertext < coin_value <= 1 then
-			set j = m[message_pointer] // j is a value between 0 and 26
-			set c[ciphertext_pointer] = k[j]
-			message_pointer = message_pointer + 1
-			if 0 <= coin_value <= prob_of_random_ciphertext then
-			randomly choose a character c from {<space>,a,..,z}
-			set c[ciphertext_pointer] = c
-			num_rand_characters = num_rand_characters + 1
-			ciphertext_pointer = ciphertext_pointer +1
-		Until ciphertext_pointer > L + num_rand_characters
-	*/

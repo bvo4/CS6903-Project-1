@@ -1,3 +1,5 @@
+#include<map>
+#include<algorithm>
 #include "encrypt.h"
 
 using namespace std;
@@ -19,24 +21,77 @@ char random_letter_generator()
 }
 
 // coin_value is a real number in [0,1]
-int coin_generation_algorithm(int ciphertext_pointer, int L)
+double coin_generation_algorithm(int ciphertext_pointer, int L)
 {
 	// Initialize Mersenne Twister pseudo-random number generator
 	random_device rd;
 	mt19937 gen(rd());
 
-	uniform_int_distribution<> dis(0, 1);
+	uniform_real_distribution<> dis(0.0, 1.0);
 	return dis(gen);
 }
 
-string encrypt(string input, string key)
+/*
+  Generate key for encryption
+
+  The key is a sequence of 27 distinct numbers between 0 and 26
+
+  :returns key: random permutation of distinct numbers from 0 to 26
+ */
+map<char, char> key_gen()
+{
+    int key_length = 26;
+    string key = " "; // include space as first character
+    for (int i = 0; i < key_length; ++i)
+    {
+        key += 'a' + i; //append all other alphabetic characters (lower-case only)
+    }
+    
+    // shuffle key randomly
+    std::random_device rd;
+    mt19937 gen = mt19937{rd()};
+    std::shuffle(key.begin(), key.end(), gen);
+    map<char, char> key_map = { {' ', key[0]} };
+    for (int i = 0; i < key_length; i++)
+    {
+        key_map['a'+i] = key[i+1];
+    }
+    return key_map;
+}
+
+void print_key(map<char, char> key)
+{
+    for (const auto& n : key) {
+      std::cout << n.first << " = " << n.second << "; " << endl;
+    }
+    cout << endl;
+}
+
+
+//Attempting to recreate the professor's encryption scheme from his pseudocode
+	/*
+		Repeat
+			let coin_value = coin_generation_algorithm(ciphertext_pointer,L)  // coin_value is a real number in [0,1]
+			if prob_of_random_ciphertext < coin_value <= 1 then
+			set j = m[message_pointer] // j is a value between 0 and 26
+			set c[ciphertext_pointer] = k[j]
+			message_pointer = message_pointer + 1
+			if 0 <= coin_value <= prob_of_random_ciphertext then
+			randomly choose a character c from {<space>,a,..,z}
+			set c[ciphertext_pointer] = c
+			num_rand_characters = num_rand_characters + 1
+			ciphertext_pointer = ciphertext_pointer +1
+		Until ciphertext_pointer > L + num_rand_characters
+
+	*/
+string encrypt(string input, map<char, char> key)
 {
 	int ciphertext_pointer = 0;
 	int message_pointer = 0;
 	int num_rand_characters = 0;
 	int prob_of_random_ciphertext = 0;
-	char CT[500];
-	int coin_value = coin_generation_algorithm(ciphertext_pointer, input.length());  // coin_value is a real number in [0,1]
+    vector<char> CT;
+
 
 /*
 TA NOTE:
@@ -49,66 +104,37 @@ TA NOTE:
 	encrypt pt a with char a from the key
 */
 	do {
-		//cout << "input #" << message_pointer << " : " << input[message_pointer] << endl;
+        double coin_value = coin_generation_algorithm(ciphertext_pointer, input.length());  // coin_value is a real number in [0,1]
 
 
-		if (prob_of_random_ciphertext < coin_value && coin_value <= 1)
+		if (prob_of_random_ciphertext == 0 || prob_of_random_ciphertext < coin_value)
 		{
 			//set j = m[message_pointer] // j is a value between 0 and 26
 			int j = input[message_pointer];
 
 			//set c[ciphertext_pointer] = k[j]
-			CT[ciphertext_pointer] = key[j % key.length()];
+            char c = key[j];
+            CT.push_back(c);
 
 			message_pointer++;
-			ciphertext_pointer++;
 		}
 
-		else if (0 <= coin_value && coin_value <= prob_of_random_ciphertext)
+		else
 		{
 			//randomly choose a character c from {<space>,a,..,z}
 			char c = random_letter_generator();
 			//set c[ciphertext_pointer] = c
-			CT[ciphertext_pointer] = c;
-			ciphertext_pointer++;
+            CT.push_back(c);
+            num_rand_characters += 1;
 		}
-		//Until ciphertext_pointer > L + num_rand_characters
-	} while (ciphertext_pointer < (input.length() - 1 + num_rand_characters) && message_pointer < 500);
-	//Return c[1]...c[L + num_rand_characters]
 
-	//Forcibly turncating to length 500 for now
-	//NEED TO REMOVE THIS LATER WHEN ACTUAL PRACTICE IS USED
-	return string(CT).substr(0, 499);
-}
-
-string generate_key(char alphabet[])
-{
-	char key[500];
-	int numbers[27] = { 0, 1, 2, 3, 4, 5, 6, 7, 8 , 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 };
-	bool erased[27] = { false };
-	for (int i = 0; i < 27; i++)
-	{
-		int index = random_number_generator();
-		while (index >= numbers[i] && erased[i] == false)
-		{
-			index = random_number_generator();
-			erased[i] = true;
-		}
-		key[alphabet[i]] = alphabet[index];
-		erased[i] = true;
-	}
-	return string(key);
-}
-
-int random_number_generator()
-{
-	// Initialize Mersenne Twister pseudo-random number generator
-	random_device rd;
-	mt19937 gen(rd());
-
-	//Choose a random letter a-z
-	uniform_int_distribution<> dis(0, 26);
-	int random_number = dis(gen);
-
-	return random_number;
+	} while (message_pointer < 500);
+    
+	  //Return c[1]...c[L + num_rand_characters]
+    string ciphertext = "";
+    for (int c = 0; c < CT.size(); ++c)
+    {
+        ciphertext += CT[c];
+    }
+	return ciphertext;
 }
