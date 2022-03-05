@@ -6,6 +6,7 @@
 #include <string>
 #include <random>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
@@ -20,6 +21,7 @@ string spaces(int indice);
 float dict_percentage(string d);
 string get_count(int count, string text);
 int lfl(int count);
-
+string sort_v(int val);
+int compare(string plain, string cipher);
 
 #endif

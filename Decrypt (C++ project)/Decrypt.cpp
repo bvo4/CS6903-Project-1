@@ -35,6 +35,10 @@ int frequency_PT3[27] = { 0 };
 int frequency_PT4[27] = { 0 };
 int frequency_PT5[27] = { 0 };
 
+//Changed the alphabet to their numeric portions for counting
+int possible_keys[27] = {};
+
+
 void Compare_Frequency(int frequency_map[]);
 
 

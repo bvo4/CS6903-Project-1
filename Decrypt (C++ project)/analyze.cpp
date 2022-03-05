@@ -158,7 +158,7 @@ int mfl(int count)
 
 int lfl(int count)
 {
-	char most_freq = ("NAN", 1000)
+	char most_freq = ("NAN", 1000);
 		for (int i = 0; i < count.keys(); i++)
 		{
 			if count[i] < most_freq[1] :
@@ -167,17 +167,19 @@ int lfl(int count)
 	return most_freq;
 }
 
-def sort_v(val)
+string sort_v(int val)
 {
 	return { k: v for k, v in sorted(val.items(), key = lambda item : item[1]) }
 }
 
-def compare(plain, cipher)
+int compare(string plain, string cipher)
 {
-	similarity = 0
-		for i, val in enumerate(plain) :
-			if abs(val - cipher[i]) <= 0.001 :
-				similarity += 1
+	int similarity = 0
+		for i, val in enumerate(plain)
+		{
+			if (abs(val - cipher[i]) <= 0.001)
+				similarity++;
+		}
 				return similarity
 }
 
