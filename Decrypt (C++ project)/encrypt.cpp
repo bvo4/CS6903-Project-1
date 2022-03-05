@@ -80,3 +80,35 @@ TA NOTE:
 	//NEED TO REMOVE THIS LATER WHEN ACTUAL PRACTICE IS USED
 	return string(CT).substr(0, 499);
 }
+
+string generate_key(char alphabet[])
+{
+	char key[500];
+	int numbers[27] = { 0, 1, 2, 3, 4, 5, 6, 7, 8 , 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26 };
+	bool erased[27] = { false };
+	for (int i = 0; i < 27; i++)
+	{
+		int index = random_number_generator();
+		while (index >= numbers[i] && erased[i] == false)
+		{
+			index = random_number_generator();
+			erased[i] = true;
+		}
+		key[alphabet[i]] = alphabet[index];
+		erased[i] = true;
+	}
+	return string(key);
+}
+
+int random_number_generator()
+{
+	// Initialize Mersenne Twister pseudo-random number generator
+	random_device rd;
+	mt19937 gen(rd());
+
+	//Choose a random letter a-z
+	uniform_int_distribution<> dis(0, 26);
+	int random_number = dis(gen);
+
+	return random_number;
+}

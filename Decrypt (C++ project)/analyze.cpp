@@ -115,3 +115,46 @@ void define_letter_frequency(int frequency_PT1[], int frequency_PT2[], int frequ
 
 	dictionary.close();
 }
+
+int get_pos(int pos, string text) {
+	int clone[27];
+
+	for (int i, val = 0; i < text.length() && val < text.length(); i++, val++)
+		clone[val] += i;
+	return clone;
+}
+
+string spaces(int indice) {
+	string lst;
+	int bck = 0;
+	int	fnt = 1;
+	string plaintext;
+	while (fnt != len(indice) - 1)
+		lst.append(indice[fnt] - indice[bck]);
+	fnt++;
+	bck++;
+	return lst;
+}
+
+string decryption(string e) {
+	string key = e.generate_key(e.alphabet);
+	for (int i = 0; i < p; i++)
+	{
+		p_count.append(e.dict_percentage(e.get_count(count, i)))
+			p_position.append(get_pos(possible_keys, i))
+
+			cipher_text = e.encrypt(i, key)
+			c.append(cipher_text)
+			c_count.append(e.dict_percentage(e.get_count(count, cipher_text)))
+			c_position.append(get_pos(possible_keys, cipher_text))
+			known_key.append({ i[-1] : cipher_text[-1] })
+	}
+	cout << (known_key) << endl;
+
+	for (int i, val = 0; i < p_position; i++, val++)
+	{
+		print("Plain text {}".format(i + 1));
+		letter = known_key[i][list(known_key[i].keys())[0]];
+		print(c_position[i][letter], letter);
+	}
+}
