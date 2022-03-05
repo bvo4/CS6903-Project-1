@@ -20,7 +20,7 @@ def generate_key(alphabet):
     return key
 
 def encrypt(m, key):
-    prob_of_random_ciphertext = 0.70
+    prob_of_random_ciphertext = 0.45
     cipher = ''
     index = 0
     num_rand = 0

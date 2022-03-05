@@ -55,7 +55,7 @@ for i in p:
 print(known_key)
 
 for i, val in enumerate(p_position):
-    print("Plain text {}".format(i+1))
+    print("Plain text {}".format(i+1), "length: {}".format(len(c[i])))
     letter = known_key[i][list(known_key[i].keys())[0]]
     print(c_position[i][letter], letter)
     print()
