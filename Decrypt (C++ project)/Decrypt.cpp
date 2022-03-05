@@ -5,6 +5,7 @@
 #include<stdlib.h>
 #include<time.h>
 #include<math.h>
+#include<vector>
 
 #include "analyze.h"
 #include "encrypt.h"
@@ -34,6 +35,14 @@ int frequency_PT2[27] = { 0 };
 int frequency_PT3[27] = { 0 };
 int frequency_PT4[27] = { 0 };
 int frequency_PT5[27] = { 0 };
+
+//Changed the alphabet to their numeric portions for counting
+int possible_keys[27] = {};
+vector<int> p_count[27];
+vector<int> c_count[27];
+vector<int> p_position[27];
+vector<int> c_position[27];
+vector<string> known_key;
 
 void Compare_Frequency(int frequency_map[]);
 
@@ -101,6 +110,29 @@ int main() {
 	return 0;
 }
 
+
+void Alvin_test(string e) {
+	string key = e.generate_key(e.alphabet);
+	for (int i = 0; i < 5; i++)
+	{
+		p_count.append(e.dict_percentage(e.get_count(count, i)))
+			p_position.append(get_pos(possible_keys, i))
+
+			cipher_text = e.encrypt(i, key)
+			c.append(cipher_text)
+			c_count.append(e.dict_percentage(e.get_count(count, cipher_text)))
+			c_position.append(get_pos(possible_keys, cipher_text))
+			known_key.append({ i[-1] : cipher_text[-1] })
+	}
+	cout << known_key << endl;
+
+	for (int i, val = 0; i < p_position; i++, val++)
+	{
+		cout << "Plain text {}" << i + 1 << endl;
+		char letter = known_key[i][(known_key[i].keys())[0]];
+		cout << c_position[i][letter], letter);
+	}
+}
 
 
 /* Compare the letter frequencies of all plaintext messages with the ciphertext to see which plaintext password has the closest match

@@ -127,6 +127,7 @@ TA NOTE:
             CT.push_back(c);
             num_rand_characters += 1;
 		}
+
 	} while (message_pointer < 500);
     
 	  //Return c[1]...c[L + num_rand_characters]

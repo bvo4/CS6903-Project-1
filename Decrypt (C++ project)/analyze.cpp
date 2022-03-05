@@ -115,3 +115,81 @@ void define_letter_frequency(int frequency_PT1[], int frequency_PT2[], int frequ
 
 	dictionary.close();
 }
+/*
+int get_pos(int pos, string text) {
+	int clone[27];
+
+	for (int i, val = 0; i < text.length() && val < text.length(); i++, val++)
+		clone[val] += i;
+	return clone;
+}
+
+string spaces(int indice) {
+	string lst;
+	int bck = 0;
+	int	fnt = 1;
+	string plaintext;
+	while (fnt != len(indice) - 1)
+		lst.append(indice[fnt] - indice[bck]);
+	fnt++;
+	bck++;
+	return lst;
+}
+
+
+string get_count(int count, string text)
+{
+	string clone;
+	for (int i = 0; i < text.length(); i++)
+		clone[i] ++;
+	return clone;
+}
+
+int mfl(int count)
+{
+	char most_freq;
+	for (int i = 0; i < count.keys(); i++)
+	{
+		if (count[i] > most_freq[1])
+			most_freq = (i, count[i]);
+	}
+	return most_freq;
+}
+
+int lfl(int count)
+{
+	char most_freq = ("NAN", 1000);
+		for (int i = 0; i < count.keys(); i++)
+		{
+			if count[i] < most_freq[1] :
+			most_freq = (i, count[i])
+		}
+	return most_freq;
+}
+
+string sort_v(int val)
+{
+	return { k: v for k, v in sorted(val.items(), key = lambda item : item[1]) }
+}
+
+int compare(string plain, string cipher)
+{
+	int similarity = 0
+		for i, val in enumerate(plain)
+		{
+			if (abs(val - cipher[i]) <= 0.001)
+				similarity++;
+		}
+				return similarity
+}
+
+float dict_percentage(int d[])
+{
+	float total = sum(d.values());
+	for (int i = 0, i < d.keys(); i++)
+	{
+		d[i] = d[i] / total;
+	}
+	return d;
+}
+*/
