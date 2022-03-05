@@ -17,6 +17,9 @@ void define_letter_frequency(int frequency_PT1[], int frequency_PT2[], int frequ
 
 int get_pos(int pos, string text);
 string spaces(int indice);
-string decryption(string e);
+float dict_percentage(string d);
+string get_count(int count, string text);
+int lfl(int count);
+
 
 #endif

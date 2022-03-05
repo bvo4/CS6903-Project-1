@@ -136,25 +136,57 @@ string spaces(int indice) {
 	return lst;
 }
 
-string decryption(string e) {
-	string key = e.generate_key(e.alphabet);
-	for (int i = 0; i < p; i++)
-	{
-		p_count.append(e.dict_percentage(e.get_count(count, i)))
-			p_position.append(get_pos(possible_keys, i))
 
-			cipher_text = e.encrypt(i, key)
-			c.append(cipher_text)
-			c_count.append(e.dict_percentage(e.get_count(count, cipher_text)))
-			c_position.append(get_pos(possible_keys, cipher_text))
-			known_key.append({ i[-1] : cipher_text[-1] })
-	}
-	cout << (known_key) << endl;
+string get_count(int count, string text)
+{
+	string clone;
+	for (int i = 0; i < text.length(); i++)
+		clone[i] ++;
+	return clone;
+}
 
-	for (int i, val = 0; i < p_position; i++, val++)
+int mfl(int count)
+{
+	char most_freq;
+	for (int i = 0; i < count.keys(); i++)
 	{
-		print("Plain text {}".format(i + 1));
-		letter = known_key[i][list(known_key[i].keys())[0]];
-		print(c_position[i][letter], letter);
+		if (count[i] > most_freq[1])
+			most_freq = (i, count[i]);
 	}
+	return most_freq;
+}
+
+int lfl(int count)
+{
+	char most_freq = ("NAN", 1000)
+		for (int i = 0; i < count.keys(); i++)
+		{
+			if count[i] < most_freq[1] :
+			most_freq = (i, count[i])
+		}
+	return most_freq;
+}
+
+def sort_v(val)
+{
+	return { k: v for k, v in sorted(val.items(), key = lambda item : item[1]) }
+}
+
+def compare(plain, cipher)
+{
+	similarity = 0
+		for i, val in enumerate(plain) :
+			if abs(val - cipher[i]) <= 0.001 :
+				similarity += 1
+				return similarity
+}
+
+float dict_percentage(int d[])
+{
+	float total = sum(d.values());
+	for (int i = 0, i < d.keys(); i++)
+	{
+		d[i] = d[i] / total;
+	}
+	return d;
 }

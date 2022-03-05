@@ -97,6 +97,30 @@ int main() {
 	return 0;
 }
 
+
+void Alvin_test(string e) {
+	string key = e.generate_key(e.alphabet);
+	for (int i = 0; i < p; i++)
+	{
+		p_count.append(e.dict_percentage(e.get_count(count, i)))
+			p_position.append(get_pos(possible_keys, i))
+
+			cipher_text = e.encrypt(i, key)
+			c.append(cipher_text)
+			c_count.append(e.dict_percentage(e.get_count(count, cipher_text)))
+			c_position.append(get_pos(possible_keys, cipher_text))
+			known_key.append({ i[-1] : cipher_text[-1] })
+	}
+	cout << (known_key) << endl;
+
+	for (int i, val = 0; i < p_position; i++, val++)
+	{
+		cout << "Plain text {}" << i + 1 << endl;
+		char letter = known_key[i][(known_key[i].keys())[0]];
+		cout << c_position[i][letter], letter);
+	}
+}
+
 /* Compare the letter frequencies of all plaintext messages with the ciphertext to see which plaintext password has the closest match
 https://www.tapatalk.com/groups/crypto/the-index-of-coincidence-the-chi-test-the-kappa-t238.html
 */
@@ -127,76 +151,3 @@ void Compare_Frequency(int frequency_map[])
 			ciphertext_pointer = ciphertext_pointer +1
 		Until ciphertext_pointer > L + num_rand_characters
 	*/
-
-
-char alphabet[27] = {}["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
-"l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "};
-
-int count[27] = { 0 };
-
-def encrypt(m, key) :
-    prob_of_random_ciphertext = 0.70
-    cipher = ''
-    index = 0
-    num_rand = 0
-    while index != len(m) :
-        coin = random.uniform(0, 1)
-        if (prob_of_random_ciphertext < coin <= 1) :
-            cipher += key[m[index]]
-            index += 1
-            if (0 <= coin <= prob_of_random_ciphertext) :
-                random_num = random.randint(0, 26)
-                cipher += alphabet[random_num]
-                num_rand += 1
-                return cipher
-
-                def get_count(count, text) :
-                clone = {}
-                for i in count.keys() :
-                    clone[i] = 0
-                    for i in text :
-clone[i] += 1
-return clone
-
-def mfl(count) :
-    most_freq = (" ", 0)
-    for i in count.keys() :
-        if count[i] > most_freq[1]:
-most_freq = (i, count[i])
-return most_freq
-
-def lfl(count) :
-    most_freq = ("NAN", 1000)
-    for i in count.keys() :
-        if count[i] < most_freq[1] :
-            most_freq = (i, count[i])
-            return most_freq
-
-            def sort_v(val) :
-            return { k: v for k, v in sorted(val.items(), key = lambda item : item[1]) }
-
-            def compare(plain, cipher) :
-            similarity = 0
-            for i, val in enumerate(plain) :
-                if abs(val - cipher[i]) <= 0.001 :
-                    similarity += 1
-                    return similarity
-
-                    def compare_all(cipher_target, plains) :
-                    text = 1
-                    all_sim = []
-                    print(cipher_target, "target", sum(cipher_target))
-                    for val in plains :
-all_sim.append(compare(cipher_target, val))
-print(val)
-for i in all_sim :
-print("This cipher target has {0} similarities with Plain text {1}".format(i, text))
-text += 1
-closest = all_sim.index(max(all_sim)) - 1
-print("This is most similar to Plain text {0}".format(all_sim.index(max(all_sim)) + 1))
-
-def dict_percentage(d) :
-    total = sum(d.values())
-    for i in d.keys() :
-        d[i] = d[i] / total
-        return d
