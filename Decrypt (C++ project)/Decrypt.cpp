@@ -109,7 +109,7 @@ int main() {
 
 void Alvin_test(string e) {
 	string key = e.generate_key(e.alphabet);
-	for (int i = 0; i < p; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		p_count.append(e.dict_percentage(e.get_count(count, i)))
 			p_position.append(get_pos(possible_keys, i))
@@ -120,7 +120,7 @@ void Alvin_test(string e) {
 			c_position.append(get_pos(possible_keys, cipher_text))
 			known_key.append({ i[-1] : cipher_text[-1] })
 	}
-	cout << (known_key) << endl;
+	cout << known_key << endl;
 
 	for (int i, val = 0; i < p_position; i++, val++)
 	{

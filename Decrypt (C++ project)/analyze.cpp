@@ -115,7 +115,7 @@ void define_letter_frequency(int frequency_PT1[], int frequency_PT2[], int frequ
 
 	dictionary.close();
 }
-
+/*
 int get_pos(int pos, string text) {
 	int clone[27];
 
@@ -192,3 +192,4 @@ float dict_percentage(int d[])
 	}
 	return d;
 }
+*/
