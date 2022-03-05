@@ -1,4 +1,3 @@
-#include<algorithm>
 #include<iostream>
 #include<string>
 #include<vector>
@@ -39,32 +38,6 @@ int frequency_PT5[27] = { 0 };
 void Compare_Frequency(int frequency_map[]);
 
 
-//randomly choose a character c from{ <space>,a,..,z }
-char random_letter_generator()
-{
-	// Initialize Mersenne Twister pseudo-random number generator
-	random_device rd;
-	mt19937 gen(rd());
-
-	//Choose a random letter a-z
-	uniform_int_distribution<> dis(0, 26);
-	int random_number = dis(gen);
-	if (random_number >= 26)
-		return ' ';
-
-	return char('a' + random_number);
-}
-
-// coin_value is a real number in [0,1]
-double coin_generation_algorithm(int ciphertext_pointer, int L)
-{
-	// Initialize Mersenne Twister pseudo-random number generator
-	random_device rd;
-	mt19937 gen(rd());
-
-	uniform_real_distribution<> dis(0.0, 1.0);
-	return dis(gen);
-}
 
 /*
 * Key Length is at most 24
@@ -73,46 +46,24 @@ double coin_generation_algorithm(int ciphertext_pointer, int L)
 /* Part 1 will involve a known-plaintext attack since we're using a plaintext dictionary to decrypt ciphertext */
 
 string decryption_scheme(string input, string k) {
-	/* The different parameters */
-
-	int frequency_map[27] = { 0 };	//We will be using this to map out the letter frequency of the ciphertext
-	string output;
-	int j = 0;
-
-	/* First, we will begin by acquiring the letter frequency of the ciphertext and the 5 plaintext candidates */
-	define_letter_frequency(frequency_PT1, frequency_PT2, frequency_PT3, frequency_PT4, frequency_PT5);
-
-	//Define the CT letter frequency
-	CT_FREQUENCY(input, frequency_map);
-
-	//Compare letter frequencies
-	Compare_Frequency(frequency_map);
-
+//	/* The different parameters */
+//
+//	int frequency_map[27] = { 0 };	//We will be using this to map out the letter frequency of the ciphertext
+//	string output;
+//	int j = 0;
+//
+//	/* First, we will begin by acquiring the letter frequency of the ciphertext and the 5 plaintext candidates */
+//	define_letter_frequency(frequency_PT1, frequency_PT2, frequency_PT3, frequency_PT4, frequency_PT5);
+//
+//	//Define the CT letter frequency
+//	CT_FREQUENCY(input, frequency_map);
+//
+//	//Compare letter frequencies
+//	Compare_Frequency(frequency_map);
+//
 	return "PLACEHOLDER";
 }
 
-/*
-  Generate key for encryption
-
-  The key is a sequence of 27 distinct numbers between 0 and 26
-
-  :returns key: random permutation of distinct numbers from 0 to 26
- */
-string key_gen()
-{
-    int key_length = 26;
-    string key = " "; // include space as first character
-    for (int i = 0; i < key_length; ++i)
-    {
-        key += 'a' + i; //append all other alphabetic characters (lower-case only)
-    }
-    
-    // shuffle key randomly
-    std::random_device rd;
-    mt19937 gen = mt19937{rd()};
-    std::shuffle(key.begin(), key.end(), gen);
-    return key;
-}
 
 int main() {
 
@@ -150,105 +101,7 @@ int main() {
 }
 
 
-//Quick function to quickly take the entire string and map the letter frequencies to the array
-void return_count(string line, int frequency_map[])
-{
-	int j = 0;
-	for (int i = 0; i < line.length(); i++)
-	{
-		if (line[i] >= 'a' && line[i] <= 'z')
-		{
-			j = line[i] - 'a';
-			frequency_map[j]++;
-		}
-		else if (line[i] == ' ')
-			frequency_map[26]++;
-	}
-}
 
-
-
-//Read the plaintext dictionary and calculate the letter frequency of all 5 candidates
-#include <fstream>
-void define_letter_frequency(int frequency_map[])
-{
-	ifstream dictionary;
-	string line;
-	dictionary.open("../../dictionary_1.txt");
-
-	while (getline(dictionary, line))
-	{
-		if (line == "Candidate Plaintext #1")
-		{
-			//Skip the blank line to reach the candidate plaintext
-			getline(dictionary, line); getline(dictionary, line);
-			return_count(line, frequency_PT1);
-		}
-
-		else if (line == "Candidate Plaintext #2")
-		{
-			//Skip the blank line to reach the candidate plaintext
-			getline(dictionary, line); getline(dictionary, line);
-			return_count(line, frequency_PT2);
-		}
-
-		else if (line == "Candidate Plaintext #3")
-		{
-			//Skip the blank line to reach the candidate plaintext
-			getline(dictionary, line); getline(dictionary, line);
-			return_count(line, frequency_PT3);
-		}
-
-		else if (line == "Candidate Plaintext #4")
-		{
-			//Skip the blank line to reach the candidate plaintext
-			getline(dictionary, line); getline(dictionary, line);
-			return_count(line, frequency_PT4);
-		}
-
-		else if (line == "Candidate Plaintext #5")
-		{
-			//Skip the blank line to reach the candidate plaintext
-			getline(dictionary, line); getline(dictionary, line);
-			return_count(line, frequency_PT5);
-		}
-
-	}
-
-	/*
-	cout << "Frequency of all alphabets in the string is:" << endl;
-	for (int i = 0; i < 27; i++)
-		cout << char(i + 'a') << " : " << frequency_PT5[i] << endl;
-	cout << "_" << " : " << frequency_PT5[26] << endl;
-	*/
-
-	dictionary.close();
-}
-
-//Same as the function above, but calculates the letter frequency of the ciphertext
-void CT_FREQUENCY(string input, int frequency_map[])
-{
-	return_count(input, frequency_map);
-
-	/*
-	cout << "Frequency of our Ciphertext:  " << endl;
-	for (int i = 0; i < 26; i++)
-		cout << char(i + 'a') << " : " << frequency_map[i] << endl;
-	cout << "_" << " : " << frequency_map[26] << endl;
-	*/
-}
-
-//  chi = SUM[i = 1 to k] ( f[i] * f'[i] ) / ( n * n' )
-float chi_square(int freq)
-{
-	float chi = 0;
-	int sum = 0;
-	for (int i = 0; i < k; i++)
-	{
-    ;
-    //sum += f[i] * f'[i]'
-	}
-}
 /* Compare the letter frequencies of all plaintext messages with the ciphertext to see which plaintext password has the closest match
 https://www.tapatalk.com/groups/crypto/the-index-of-coincidence-the-chi-test-the-kappa-t238.html
 */
@@ -271,72 +124,3 @@ void Compare_Frequency(int frequency_map[])
 
 }
 
-//Attempting to recreate the professor's encryption scheme from his pseudocode
-	/*
-		Repeat
-			let coin_value = coin_generation_algorithm(ciphertext_pointer,L)  // coin_value is a real number in [0,1]
-			if prob_of_random_ciphertext < coin_value <= 1 then
-			set j = m[message_pointer] // j is a value between 0 and 26
-			set c[ciphertext_pointer] = k[j]
-			message_pointer = message_pointer + 1
-			if 0 <= coin_value <= prob_of_random_ciphertext then
-			randomly choose a character c from {<space>,a,..,z}
-			set c[ciphertext_pointer] = c
-			num_rand_characters = num_rand_characters + 1
-			ciphertext_pointer = ciphertext_pointer +1
-		Until ciphertext_pointer > L + num_rand_characters
-
-	*/
-string encrypt(string input, string key)
-{
-	int ciphertext_pointer = 0;
-	int message_pointer = 0;
-	int num_rand_characters = 0;
-	int prob_of_random_ciphertext = 0;
-  vector<char> CT;
-
-
-/*
-TA NOTE:
-	abc  = plain text
-	abc = KEY
-	pt pointer is at a
-	flip a coin. if 0<=value<=prob of random ciphertextncy
-	insert random char
-	else
-	encrypt pt a with char a from the key
-*/
-	do {
-        double coin_value = coin_generation_algorithm(ciphertext_pointer, input.length());  // coin_value is a real number in [0,1]
-
-
-		if (prob_of_random_ciphertext < coin_value)
-		{
-			//set j = m[message_pointer] // j is a value between 0 and 26
-			int j = input[message_pointer];
-
-			//set c[ciphertext_pointer] = k[j]
-      char c = key[j % key.length()];
-       CT.push_back(c);
-
-			message_pointer++;
-		}
-
-		else
-		{
-			//randomly choose a character c from {<space>,a,..,z}
-			char c = random_letter_generator();
-			//set c[ciphertext_pointer] = c
-      CT.push_back(c);
-      num_rand_characters += 1;
-		}
-	} while (message_pointer < 500);
-    
-	  //Return c[1]...c[L + num_rand_characters]
-    string ciphertext = "";
-    for (int c = 0; c < CT.size(); ++c)
-    {
-        ciphertext += CT[c];
-    }
-	return ciphertext;
-}
