@@ -47,7 +47,6 @@ vector<string> known_key;
 void Compare_Frequency(int frequency_map[]);
 
 
-
 /*
 * Key Length is at most 24
 * Message length is at most 24
@@ -57,18 +56,17 @@ void Compare_Frequency(int frequency_map[]);
 string decryption_scheme(string input, map<char, char> key) {
 //	/* The different parameters */
 //
-//	int frequency_map[27] = { 0 };	//We will be using this to map out the letter frequency of the ciphertext
-//	string output;
-//	int j = 0;
+	int frequency_map[27] = { 0 };	//We will be using this to map out the letter frequency of the ciphertext
+	string output;
 //
 //	/* First, we will begin by acquiring the letter frequency of the ciphertext and the 5 plaintext candidates */
-//	define_letter_frequency(frequency_PT1, frequency_PT2, frequency_PT3, frequency_PT4, frequency_PT5);
+	define_letter_frequency(frequency_PT1, frequency_PT2, frequency_PT3, frequency_PT4, frequency_PT5);
 //
 //	//Define the CT letter frequency
-//	CT_FREQUENCY(input, frequency_map);
+	CT_FREQUENCY(input, frequency_map);
 //
 //	//Compare letter frequencies
-//	Compare_Frequency(frequency_map);
+	Compare_Frequency(frequency_map);
 //
 	return "PLACEHOLDER";
 }
@@ -110,7 +108,7 @@ int main() {
 	return 0;
 }
 
-
+/*
 void Alvin_test(string e) {
 	string key = e.generate_key(e.alphabet);
 	for (int i = 0; i < 5; i++)
@@ -133,7 +131,7 @@ void Alvin_test(string e) {
 		cout << c_position[i][letter], letter);
 	}
 }
-
+*/
 
 /* Compare the letter frequencies of all plaintext messages with the ciphertext to see which plaintext password has the closest match
 https://www.tapatalk.com/groups/crypto/the-index-of-coincidence-the-chi-test-the-kappa-t238.html
@@ -148,9 +146,22 @@ void Compare_Frequency(int frequency_map[])
 
 	//We will use the chi test to determine which plaintext candidate is the best match.
 
-	while (true)
+	//Used for sorting and temporary analysis
+	vector<int> temp_PT;
+	vector<int> temp_CT;
+
+	for (int i = 0; i < 27; i++)
 	{
-		if(frequency_map[i]){}
+		temp_CT.push_back(frequency_map[i]);
+		temp_PT.push_back(frequency_PT1[i]);
+	}
+	
+	//Sorting letters to be based  on frequencies, but need to match the letters as well
+
+	cout << "Signal" << endl;
+	for (int i = 0; i < 27; i++)
+	{
+		cout << temp_CT[i] << endl;
 	}
 
 	cout << "Chi Square of : " << chi_square(0, frequency_map, frequency_PT1) << endl;

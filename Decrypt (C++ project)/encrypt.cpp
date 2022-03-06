@@ -152,6 +152,7 @@ TA NOTE:
 	return ciphertext;
 }
 
+/*
 string generate_key(string alphabet)
 {
 	string key;
@@ -169,3 +170,4 @@ string generate_key(string alphabet)
 	}
 	return key;
 }
+*/
