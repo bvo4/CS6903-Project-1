@@ -20,6 +20,19 @@ char random_letter_generator()
 	return char('a' + random_number);
 }
 
+//randomly choose a character c from{ <space>,a,..,z }
+int random_number_generator()
+{
+	// Initialize Mersenne Twister pseudo-random number generator
+	random_device rd;
+	mt19937 gen(rd());
+
+	//Choose a random letter a-z
+	uniform_int_distribution<> dis(0, 25);
+	int random_number = dis(gen);
+	return random_number;
+}
+
 // coin_value is a real number in [0,1]
 double coin_generation_algorithm(int ciphertext_pointer, int L)
 {
@@ -137,4 +150,22 @@ TA NOTE:
         ciphertext += CT[c];
     }
 	return ciphertext;
+}
+
+string generate_key(string alphabet)
+{
+	string key;
+	vector<int> numbers[27];
+	for (int i = 0; i < 27; i++)
+		numbers->push_back(i);
+
+	for (int i = 0; i < 27; i++)
+	{
+		int index = random_number_generator();
+		while (numbers[index] != NULL)
+			index = random_number_generator();
+		key[alphabet[i]] = alphabet[index];
+		numbers->erase(index);
+	}
+	return key;
 }

@@ -10,6 +10,7 @@
 using namespace std;
 
 char random_letter_generator();
+int random_number_generator();
 
 std::map<char, char> key_gen();
 void print_key(map<char, char> key);
