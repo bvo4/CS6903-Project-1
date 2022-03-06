@@ -10,6 +10,12 @@
 
 using namespace std;
 
+struct letter {
+	char letter;
+	int freq;
+
+};
+
 int decipher_key_length();
 float chi_square(int freq, int frequency_map[], int frequency_PT[]);
 void return_count(string line, int frequency_map[]);

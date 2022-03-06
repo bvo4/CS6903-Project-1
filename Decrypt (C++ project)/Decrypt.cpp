@@ -147,21 +147,24 @@ void Compare_Frequency(int frequency_map[])
 	//We will use the chi test to determine which plaintext candidate is the best match.
 
 	//Used for sorting and temporary analysis
-	vector<int> temp_PT;
-	vector<int> temp_CT;
+	vector<letter> temp_PT;
+	vector <letter> temp_CT;
 
 	for (int i = 0; i < 27; i++)
 	{
-		temp_CT.push_back(frequency_map[i]);
-		temp_PT.push_back(frequency_PT1[i]);
+		letter temp;
+		temp.freq = frequency_map[i];
+		temp.letter = char(i + 'a');
+		temp_CT.push_back(temp);
+
+		temp.freq = frequency_PT1[i];
+		temp_PT.push_back(temp);
 	}
 	
 	//Sorting letters to be based  on frequencies, but need to match the letters as well
-
-	cout << "Signal" << endl;
 	for (int i = 0; i < 27; i++)
 	{
-		cout << temp_CT[i] << endl;
+		cout << temp_CT[i].letter << " : " << temp_CT[i].freq << endl;
 	}
 
 	cout << "Chi Square of : " << chi_square(0, frequency_map, frequency_PT1) << endl;
