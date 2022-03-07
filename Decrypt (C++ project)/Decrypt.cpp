@@ -30,11 +30,11 @@ Since this is using the monoalphabetic substitution cipher, look at the frequenc
 */
 
 /* The frequency mappings for plaintext #1 - #5 */
-int frequency_PT1[27] = { 0 };
-int frequency_PT2[27] = { 0 };
-int frequency_PT3[27] = { 0 };
-int frequency_PT4[27] = { 0 };
-int frequency_PT5[27] = { 0 };
+letter frequency_PT1[27] = { 0 };
+letter frequency_PT2[27] = { 0 };
+letter frequency_PT3[27] = { 0 };
+letter frequency_PT4[27] = { 0 };
+letter frequency_PT5[27] = { 0 };
 
 //Changed the alphabet to their numeric portions for counting
 int possible_keys[27] = {};
@@ -44,7 +44,7 @@ vector<int> p_position[27];
 vector<int> c_position[27];
 vector<string> known_key;
 
-void Compare_Frequency(int frequency_map[]);
+void Compare_Frequency(letter frequency_map[]);
 
 
 /*
@@ -56,7 +56,7 @@ void Compare_Frequency(int frequency_map[]);
 string decryption_scheme(string input, map<char, char> key) {
 //	/* The different parameters */
 //
-	int frequency_map[27] = { 0 };	//We will be using this to map out the letter frequency of the ciphertext
+	letter frequency_map[27] = { 0 };	//We will be using this to map out the letter frequency of the ciphertext
 	string output;
 //
 //	/* First, we will begin by acquiring the letter frequency of the ciphertext and the 5 plaintext candidates */
@@ -108,35 +108,10 @@ int main() {
 	return 0;
 }
 
-/*
-void Alvin_test(string e) {
-	string key = e.generate_key(e.alphabet);
-	for (int i = 0; i < 5; i++)
-	{
-		p_count.append(e.dict_percentage(e.get_count(count, i)))
-			p_position.append(get_pos(possible_keys, i))
-
-			cipher_text = e.encrypt(i, key)
-			c.append(cipher_text)
-			c_count.append(e.dict_percentage(e.get_count(count, cipher_text)))
-			c_position.append(get_pos(possible_keys, cipher_text))
-			known_key.append({ i[-1] : cipher_text[-1] })
-	}
-	cout << known_key << endl;
-
-	for (int i, val = 0; i < p_position; i++, val++)
-	{
-		cout << "Plain text {}" << i + 1 << endl;
-		char letter = known_key[i][(known_key[i].keys())[0]];
-		cout << c_position[i][letter], letter);
-	}
-}
-*/
-
 /* Compare the letter frequencies of all plaintext messages with the ciphertext to see which plaintext password has the closest match
 https://www.tapatalk.com/groups/crypto/the-index-of-coincidence-the-chi-test-the-kappa-t238.html
 */
-void Compare_Frequency(int frequency_map[])
+void Compare_Frequency(letter frequency_map[])
 {
 	//Will count votes for each of the 5 plaintext messages
 	int weight[5] = { 0 };
@@ -148,16 +123,16 @@ void Compare_Frequency(int frequency_map[])
 
 	//Used for sorting and temporary analysis
 	vector<letter> temp_PT;
-	vector <letter> temp_CT;
+	vector<letter> temp_CT;
 
 	for (int i = 0; i < 27; i++)
 	{
 		letter temp;
-		temp.freq = frequency_map[i];
+		temp.freq = frequency_map[i].freq;
 		temp.letter = char(i + 'a');
 		temp_CT.push_back(temp);
 
-		temp.freq = frequency_PT1[i];
+		temp.freq = frequency_PT1[i].freq;
 		temp_PT.push_back(temp);
 	}
 	
