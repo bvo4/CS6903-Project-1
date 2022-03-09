@@ -36,14 +36,6 @@ letter frequency_PT3[27] = { 0 };
 letter frequency_PT4[27] = { 0 };
 letter frequency_PT5[27] = { 0 };
 
-//Changed the alphabet to their numeric portions for counting
-int possible_keys[27] = {};
-vector<int> p_count[27];
-vector<int> c_count[27];
-vector<int> p_position[27];
-vector<int> c_position[27];
-vector<string> known_key;
-
 void Compare_Frequency(letter frequency_map[]);
 
 
@@ -68,6 +60,8 @@ string decryption_scheme(string input, map<char, char> key) {
 //	//Compare letter frequencies
 	Compare_Frequency(frequency_map);
 //
+
+	cout << "Looking into decryption of the first word" << endl;
 	return "PLACEHOLDER";
 }
 
@@ -83,7 +77,7 @@ int main() {
 		//Uses a mono-alphabetic substitution cipher and attempts to decrypt it
 
 		/* Use our encryption pseudocode to encode plaintext into ciphertext */
-		input = "underwaists wayfarings fluty analgia refuels transcribing nibbled okra buttonholer venalness hamlet praus apprisers presifted cubital walloper dissembler bunting wizardries squirrel preselect befitted licensee encumbrances proliferations tinkerer egrets recourse churl kolinskies ionospheric docents unnatural scuffler muches petulant acorns subconscious xyster tunelessly boners slag amazement intercapillary manse unsay embezzle stuccoer dissembles batwing valediction iceboxes ketchups phonily con";
+		input = "underwaists";
 		cout << "Our input is:  " << input << endl << endl;
         cout << "Key: " << endl;
         print_key(key);

@@ -18,7 +18,7 @@ And n and n' are the total number of characters in the first and second strings.
 float chi_square(int freq, letter frequency_map[], letter frequency_PT[])
 {
 	float chi = 0;
-	int sum = 0;
+	float sum = 0;
 	int k = 27;
 	int n = 500;		//Length of first string
 	int n2 = 500;		//Length of second string
@@ -68,7 +68,7 @@ void define_letter_frequency(letter frequency_PT1[], letter frequency_PT2[], let
 {
 	ifstream dictionary;
 	string line;
-	dictionary.open("../../dictionary_1.txt");
+	dictionary.open("../../dictionary_test.txt");
 
 	while (getline(dictionary, line))
 	{

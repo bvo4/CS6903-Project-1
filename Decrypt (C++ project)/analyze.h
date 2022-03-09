@@ -12,7 +12,7 @@ using namespace std;
 
 struct letter {
 	char letter;
-	int freq;
+	int freq = 0;
 
 };
 

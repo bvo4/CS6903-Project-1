@@ -141,7 +141,7 @@ TA NOTE:
             num_rand_characters += 1;
 		}
 
-	} while (message_pointer < 500);
+	} while (message_pointer < 500 && message_pointer < input.length());
     
 	  //Return c[1]...c[L + num_rand_characters]
     string ciphertext = "";

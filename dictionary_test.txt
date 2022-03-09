@@ -1,0 +1,21 @@
+Test 1
+
+Candidate Plaintext #1
+
+underwaists
+
+Candidate Plaintext #2
+
+rhomb
+
+Candidate Plaintext #3
+
+yorkers
+
+Candidate Plaintext #4
+
+cygnets 
+
+Candidate Plaintext #5
+
+ovulatory
