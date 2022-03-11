@@ -30,11 +30,11 @@ Since this is using the monoalphabetic substitution cipher, look at the frequenc
 */
 
 /* The frequency mappings for plaintext #1 - #5 */
-letter frequency_PT1[27] = { 0 };
-letter frequency_PT2[27] = { 0 };
-letter frequency_PT3[27] = { 0 };
-letter frequency_PT4[27] = { 0 };
-letter frequency_PT5[27] = { 0 };
+letter frequency_PT1[27];
+letter frequency_PT2[27];
+letter frequency_PT3[27];
+letter frequency_PT4[27];
+letter frequency_PT5[27];
 
 void Compare_Frequency(letter frequency_map[]);
 
@@ -60,8 +60,6 @@ string decryption_scheme(string input, map<char, char> key) {
 //	//Compare letter frequencies
 	Compare_Frequency(frequency_map);
 //
-
-	cout << "Looking into decryption of the first word" << endl;
 	return "PLACEHOLDER";
 }
 
@@ -79,8 +77,8 @@ int main() {
 		/* Use our encryption pseudocode to encode plaintext into ciphertext */
 		input = "underwaists";
 		cout << "Our input is:  " << input << endl << endl;
-        cout << "Key: " << endl;
-        print_key(key);
+//        cout << "Key: " << endl;
+//        print_key(key);
         input = encrypt(input, key);
 		cout << "Encrypted output:  " << input << endl;
 
@@ -129,14 +127,9 @@ void Compare_Frequency(letter frequency_map[])
 		temp.freq = frequency_PT1[i].freq;
 		temp_PT.push_back(temp);
 	}
-	
-	//Sorting letters to be based  on frequencies, but need to match the letters as well
-	for (int i = 0; i < 27; i++)
-	{
-		cout << temp_CT[i].letter << " : " << temp_CT[i].freq << endl;
-	}
 
-	cout << "Chi Square of : " << chi_square(0, frequency_map, frequency_PT1) << endl;
+
+	cout << "Chi Square of : " << chi_square(0, frequency_map, frequency_map) << endl;
 
 }
 

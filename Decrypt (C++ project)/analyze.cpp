@@ -15,19 +15,20 @@ Where k is the number of distinct letters in the alphabet,
 f is the number of times the i'th letter appears in the first string and f' is the number of times the i'th letter appears in the second string. 
 And n and n' are the total number of characters in the first and second strings.
 */
-float chi_square(int freq, letter frequency_map[], letter frequency_PT[])
+float chi_square(int freq, letter * frequency_map, letter * frequency_PT)
 {
 	float chi = 0;
 	float sum = 0;
-	int k = 27;
+	int k = 27;			//Number of letters in the alphabet
 	int n = 500;		//Length of first string
 	int n2 = 500;		//Length of second string
 
 	for (int i = 0; i < k; i++)
 	{
-			sum += (frequency_map[i].freq * frequency_PT[i].freq) / (n/n2);
+		cout << frequency_map[i].letter << " : " << frequency_PT[i].letter << endl;
+		//sum += (frequency_map[i].freq * frequency_PT[i].freq);
+		//sum = sum /(n/(n2 - 1));
 	}
-	
 
 	return sum;
 }
@@ -45,7 +46,6 @@ void return_count(string line, letter frequency_map[])
 		}
 		else if (line[i] == ' ')
 		{
-
 			frequency_map[26].freq++;
 		}
 	}
@@ -68,7 +68,7 @@ void define_letter_frequency(letter frequency_PT1[], letter frequency_PT2[], let
 {
 	ifstream dictionary;
 	string line;
-	dictionary.open("../../dictionary_test.txt");
+	dictionary.open("../../dictionary_1.txt");
 
 	while (getline(dictionary, line))
 	{
