@@ -148,11 +148,21 @@ void key_map(letter frequency_map[], letter frequency_PT[], string ciphertext)
 	cout << "Initiating brute force mapping:  " << endl;
 	cout << " Input:  " << ciphertext << endl;
 	string temp = ciphertext;
+	vector<bool> replaced(temp.length());		//Used to mark which letters have been swapped
+	replaced = { false };
 
 	for (int i = 0; i < 26; i++)
 	{
 		cout << "Using: " << frequency_map[i].letter << " with " << char('a' + i) << endl;
-		temp.replace(temp.begin(), temp.end(), char('a' + i), frequency_map[i].letter);
+
+		for (int j = 0; j < temp.length(); j++)
+		{
+			if (temp[j] == frequency_map[i].letter && replaced[j] == false)
+			{
+				replaced[j] = true;
+				//temp[j] = frequency_PT[i];
+			}
+		}
 	}
 	cout << "End result:  " << temp << endl;
 }
