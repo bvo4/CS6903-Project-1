@@ -128,7 +128,7 @@ void Compare_Frequency(letter frequency_map[])
 		temp_PT.push_back(temp);
 	}
 
-
+	percentile(frequency_map);
 	cout << "Chi Square of : " << chi_square(0, frequency_map, frequency_map) << endl;
 
 }

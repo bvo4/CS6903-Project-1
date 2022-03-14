@@ -33,9 +33,20 @@ float chi_square(int freq, letter * frequency_map, letter * frequency_PT)
 	return sum;
 }
 
+void percentile(letter frequency_map[])
+{
+	cout << "Frequency:  " << frequency_map[5].letter << endl;
+}
+
 //Quick function to quickly take the entire string and map the letter frequencies to the array
 void return_count(string line, letter frequency_map[])
 {
+	//Define all letters here because why not
+	for (int i = 0; i < 26; i++)
+	{
+		frequency_map[i].letter = 'a' + i;
+	}
+
 	int j;
 	for (int i = 0; i < line.length(); i++)
 	{
@@ -46,6 +57,7 @@ void return_count(string line, letter frequency_map[])
 		}
 		else if (line[i] == ' ')
 		{
+			frequency_map[26].letter = ' ';
 			frequency_map[26].freq++;
 		}
 	}

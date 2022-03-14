@@ -17,6 +17,7 @@ struct letter {
 
 int decipher_key_length();
 float chi_square(int freq, letter * frequency_map, letter * frequency_PT);
+void percentile(letter frequency_map[]);
 void return_count(string line, letter frequency_map[]);
 void CT_FREQUENCY(string input, letter frequency_map[]);
 void define_letter_frequency(letter frequency_PT1[], letter frequency_PT2[], letter frequency_PT3[], letter frequency_PT4[], letter frequency_PT5[]);
