@@ -54,7 +54,8 @@ string decryption_scheme(string input, map<char, char> key) {
 //
 //	/* First, we will begin by acquiring the letter frequency of the ciphertext and the 5 plaintext candidates */
 	define_letter_frequency(frequency_PT1, frequency_PT2, frequency_PT3, frequency_PT4, frequency_PT5);
-//
+	cout << "SAD:  " << frequency_PT1[0].letter << endl;
+	//
 //	//Define the CT letter frequency
 	CT_FREQUENCY(input, frequency_map);
 //
@@ -76,7 +77,7 @@ int main() {
 		//Uses a mono-alphabetic substitution cipher and attempts to decrypt it
 
 		/* Use our encryption pseudocode to encode plaintext into ciphertext */
-		input = "underwaists";
+		input = "underwaists wayfarings fluty analgia refuels transcribing nibbled okra buttonholer venalness hamlet praus apprisers presifted cubital walloper dissembler bunting wizardries squirrel preselect befitted licensee encumbrances proliferations tinkerer egrets recourse churl kolinskies ionospheric docents unnatural scuffler muches petulant acorns subconscious xyster tunelessly boners slag amazement intercapillary manse unsay embezzle stuccoer dissembles batwing valediction iceboxes ketchups phonily con";
 		cout << "Our input is:  " << input << endl << endl;
 //        cout << "Key: " << endl;
 //        print_key(key);
@@ -130,7 +131,7 @@ void Compare_Frequency(letter frequency_map[])
 	}
 
 	percentile(frequency_PT1);
-	cout << "Chi Square of : " << chi_square(0, frequency_map, frequency_map) << endl;
+	cout << "Chi Square of : " << chi_square(0, frequency_map, frequency_PT1) << endl;
 
 }
 

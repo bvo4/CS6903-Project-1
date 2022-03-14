@@ -25,7 +25,7 @@ float chi_square(int freq, letter * frequency_map, letter * frequency_PT)
 
 	for (int i = 0; i < k; i++)
 	{
-		cout << frequency_map[i].letter << " : " << frequency_PT[i].freq << endl;
+		cout << frequency_map[i].letter << " : " << frequency_PT[i].freq << " vs. " << frequency_PT[i].letter << " : " << frequency_PT[i].freq << endl;
 		sum += pow(frequency_map[i].freq - frequency_PT[i].freq, 2);
 		sum = sum / (frequency_map[i].freq);
 	}
@@ -47,9 +47,7 @@ void return_count(string line, letter frequency_map[])
 {
 	//Define all letters here because why not
 	for (int i = 0; i < 26; i++)
-	{
 		frequency_map[i].letter = 'a' + i;
-	}
 
 	int j;
 	for (int i = 0; i < line.length(); i++)
@@ -84,7 +82,7 @@ void define_letter_frequency(letter frequency_PT1[], letter frequency_PT2[], let
 {
 	ifstream dictionary;
 	string line;
-	dictionary.open("../../dictionary_1.txt");
+	dictionary.open("../../../dictionary_1.txt");
 
 	while (getline(dictionary, line))
 	{
@@ -92,6 +90,7 @@ void define_letter_frequency(letter frequency_PT1[], letter frequency_PT2[], let
 		{
 			//Skip the blank line to reach the candidate plaintext
 			getline(dictionary, line); getline(dictionary, line);
+			cout << "READING PLAINTEXT 1" << endl;
 			return_count(line, frequency_PT1);
 		}
 
@@ -122,7 +121,10 @@ void define_letter_frequency(letter frequency_PT1[], letter frequency_PT2[], let
 			getline(dictionary, line); getline(dictionary, line);
 			return_count(line, frequency_PT5);
 		}
-
+		else
+		{
+			cout << "READING:  " << line << endl;
+		}
 	}
 
 	/*
