@@ -37,6 +37,7 @@ letter frequency_PT4[27];
 letter frequency_PT5[27];
 
 void Compare_Frequency(letter frequency_map[]);
+void key_map(letter frequency_map[], letter frequency_PT[]);
 
 
 /*
@@ -128,8 +129,12 @@ void Compare_Frequency(letter frequency_map[])
 		temp_PT.push_back(temp);
 	}
 
-	percentile(frequency_map);
+	percentile(frequency_PT1);
 	cout << "Chi Square of : " << chi_square(0, frequency_map, frequency_map) << endl;
 
 }
 
+void key_map(letter frequency_map[], letter frequency_PT[])
+{
+	
+}
