@@ -36,8 +36,8 @@ letter frequency_PT3[27];
 letter frequency_PT4[27];
 letter frequency_PT5[27];
 
-void Compare_Frequency(letter frequency_map[]);
-void key_map(letter frequency_map[], letter frequency_PT[]);
+void Compare_Frequency(letter frequency_map[], string ciphertext);
+void key_map(letter frequency_map[], letter frequency_PT[], string ciphertext);
 
 
 /*
@@ -54,13 +54,12 @@ string decryption_scheme(string input, map<char, char> key) {
 //
 //	/* First, we will begin by acquiring the letter frequency of the ciphertext and the 5 plaintext candidates */
 	define_letter_frequency(frequency_PT1, frequency_PT2, frequency_PT3, frequency_PT4, frequency_PT5);
-	cout << "SAD:  " << frequency_PT1[0].letter << endl;
 	//
 //	//Define the CT letter frequency
 	CT_FREQUENCY(input, frequency_map);
 //
 //	//Compare letter frequencies
-	Compare_Frequency(frequency_map);
+	Compare_Frequency(frequency_map, input);
 //
 	return "PLACEHOLDER";
 }
@@ -105,7 +104,7 @@ int main() {
 /* Compare the letter frequencies of all plaintext messages with the ciphertext to see which plaintext password has the closest match
 https://www.tapatalk.com/groups/crypto/the-index-of-coincidence-the-chi-test-the-kappa-t238.html
 */
-void Compare_Frequency(letter frequency_map[])
+void Compare_Frequency(letter frequency_map[], string ciphertext)
 {
 	//Will count votes for each of the 5 plaintext messages
 	int weight[5] = { 0 };
@@ -140,6 +139,20 @@ void Compare_Frequency(letter frequency_map[])
 
 	percentile(frequency_PT1);
 	cout << "Chi Square of : " << chi_square(0, temp_CT2, temp_PT2) << endl;
+	key_map(temp_CT2, temp_PT2, ciphertext);
 
 }
 
+void key_map(letter frequency_map[], letter frequency_PT[], string ciphertext)
+{
+	cout << "Initiating brute force mapping:  " << endl;
+	cout << " Input:  " << ciphertext << endl;
+	string temp = ciphertext;
+
+	for (int i = 0; i < 26; i++)
+	{
+		cout << "Using: " << frequency_map[i].letter << " with " << char('a' + i) << endl;
+		temp.replace(temp.begin(), temp.end(), char('a' + i), frequency_map[i].letter);
+	}
+	cout << "End result:  " << temp << endl;
+}
