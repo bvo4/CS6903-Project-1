@@ -111,13 +111,15 @@ void Compare_Frequency(letter frequency_map[])
 	int weight[5] = { 0 };
 
 	//For each letter, find the top 5 corresponding letters for each plaintext candidates to find the closest match.
-	int i, coincidence, max = 0;
+	int max = 0;
 
 	//We will use the chi test to determine which plaintext candidate is the best match.
 
 	//Used for sorting and temporary analysis
 	vector<letter> temp_PT;
 	vector<letter> temp_CT;
+	letter temp_PT2[27];
+	letter temp_CT2[27];
 
 	for (int i = 0; i < 27; i++)
 	{
@@ -130,12 +132,14 @@ void Compare_Frequency(letter frequency_map[])
 		temp_PT.push_back(temp);
 	}
 
+	sort(temp_PT.begin(), temp_PT.end(), freq_compare);
+	sort(temp_CT.begin(), temp_CT.end(), freq_compare);
+
+	copy(temp_PT.begin(), temp_PT.end(), temp_PT2);
+	copy(temp_CT.begin(), temp_CT.end(), temp_CT2);
+
 	percentile(frequency_PT1);
-	cout << "Chi Square of : " << chi_square(0, frequency_map, frequency_PT1) << endl;
+	cout << "Chi Square of : " << chi_square(0, temp_CT2, temp_PT2) << endl;
 
 }
 
-void key_map(letter frequency_map[], letter frequency_PT[])
-{
-	
-}
