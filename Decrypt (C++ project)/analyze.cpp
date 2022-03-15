@@ -37,13 +37,20 @@ float chi_square(mapping frequency[], letter* frequency_map, letter* frequency_P
 	return sum;
 }
 
-void percentile(letter frequency_map[])
+void percentile(letter frequency_map[], mapping frequency[])
 {
+	vector<double> temp;
 	for (int i = 0; i < 27; i++)
 	{
 		double percent = (frequency_map[i].freq * 100) / (500 - 1);
+		temp.push_back(percent);
+
+		cout << std::fixed;
+		cout << std::setprecision(2);
 		cout << "Percentile:  " << frequency_map[i].letter << "=" << percent << endl;
 	}
+	
+
 }
 
 //Quick function to quickly take the entire string and map the letter frequencies to the array

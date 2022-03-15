@@ -138,8 +138,8 @@ void Compare_Frequency(letter frequency_map[], string ciphertext)
 	copy(temp_PT.begin(), temp_PT.end(), temp_PT2);
 	copy(temp_CT.begin(), temp_CT.end(), temp_CT2);
 
-	percentile(frequency_PT1);
-	cout << "Chi Square of : " << chi_square(frequency, temp_CT2, temp_PT2) << endl;
+	percentile(frequency_PT1, frequency);
+	//cout << "Chi Square of : " << chi_square(frequency, temp_CT2, temp_PT2) << endl;
 	key_map(frequency, temp_PT2, ciphertext);
 
 }
@@ -154,7 +154,7 @@ void key_map(mapping frequency[], letter frequency_PT[], string ciphertext)
 
 	for (int i = 0; i < 27; i++)
 	{
-		cout << "Matching: " << frequency[i].PT<< " with " << frequency[i].CT << endl;
+		//cout << "Matching: " << frequency[i].PT<< " with " << frequency[i].CT << endl;
 
 		for (int j = 0; j < temp.length(); j++)
 		{
