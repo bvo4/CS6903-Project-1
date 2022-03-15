@@ -49,7 +49,7 @@ void percentile(letter frequency_map[], mapping frequency[])
 		cout << std::setprecision(2);
 		cout << "Percentile:  " << frequency_map[i].letter << "=" << percent << endl;
 	}
-	
+	mapping.PT[]
 
 }
 
