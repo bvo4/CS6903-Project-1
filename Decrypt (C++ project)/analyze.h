@@ -15,9 +15,14 @@ struct letter {
 	int freq = 0;
 };
 
+struct mapping {
+	char PT[27];
+	char CT[27];
+};
+
 int decipher_key_length();
 bool freq_compare(const letter a, const letter b);
-float chi_square(int freq, letter * frequency_map, letter * frequency_PT);
+float chi_square(mapping frequency[], letter* frequency_map, letter* frequency_PT);
 void percentile(letter frequency_map[]);
 void return_count(string line, letter frequency_map[]);
 void CT_FREQUENCY(string input, letter frequency_map[]);

@@ -37,7 +37,7 @@ letter frequency_PT4[27];
 letter frequency_PT5[27];
 
 void Compare_Frequency(letter frequency_map[], string ciphertext);
-void key_map(letter frequency_map[], letter frequency_PT[], string ciphertext);
+void key_map(mapping frequency[], letter frequency_PT[], string ciphertext);
 
 
 /*
@@ -119,6 +119,7 @@ void Compare_Frequency(letter frequency_map[], string ciphertext)
 	vector<letter> temp_CT;
 	letter temp_PT2[27];
 	letter temp_CT2[27];
+	mapping frequency[27];
 
 	for (int i = 0; i < 27; i++)
 	{
@@ -138,12 +139,12 @@ void Compare_Frequency(letter frequency_map[], string ciphertext)
 	copy(temp_CT.begin(), temp_CT.end(), temp_CT2);
 
 	percentile(frequency_PT1);
-	cout << "Chi Square of : " << chi_square(0, temp_CT2, temp_PT2) << endl;
-	key_map(temp_CT2, temp_PT2, ciphertext);
+	cout << "Chi Square of : " << chi_square(frequency, temp_CT2, temp_PT2) << endl;
+	key_map(frequency, temp_PT2, ciphertext);
 
 }
 
-void key_map(letter frequency_map[], letter frequency_PT[], string ciphertext)
+void key_map(mapping frequency[], letter frequency_PT[], string ciphertext)
 {
 	cout << "Initiating brute force mapping:  " << endl;
 	cout << " Input:  " << ciphertext << endl;
@@ -151,13 +152,13 @@ void key_map(letter frequency_map[], letter frequency_PT[], string ciphertext)
 	vector<bool> replaced(temp.length());		//Used to mark which letters have been swapped
 	replaced = { false };
 
-	for (int i = 0; i < 26; i++)
+	for (int i = 0; i < 27; i++)
 	{
-		cout << "Using: " << frequency_map[i].letter << " with " << char('a' + i) << endl;
+		cout << "Matching: " << frequency[i].PT<< " with " << frequency[i].CT << endl;
 
 		for (int j = 0; j < temp.length(); j++)
 		{
-			if (temp[j] == frequency_map[i].letter && replaced[j] == false)
+			if (temp[j] == frequency[i].PT[i] && replaced[j] == false)
 			{
 				replaced[j] = true;
 				//temp[j] = frequency_PT[i];

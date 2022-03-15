@@ -19,7 +19,7 @@ Where k is the number of distinct letters in the alphabet,
 f is the number of times the i'th letter appears in the first string and f' is the number of times the i'th letter appears in the second string. 
 And n and n' are the total number of characters in the first and second strings.
 */
-float chi_square(int freq, letter * frequency_map, letter * frequency_PT)
+float chi_square(mapping frequency[], letter* frequency_map, letter* frequency_PT)
 {
 	float chi = 0;
 	double sum = 0;
