@@ -49,7 +49,6 @@ void percentile(letter frequency_map[], mapping frequency[])
 		cout << std::setprecision(2);
 		cout << "Percentile:  " << frequency_map[i].letter << "=" << percent << endl;
 	}
-	mapping.PT[]
 
 }
 
@@ -133,12 +132,12 @@ void define_letter_frequency(letter frequency_PT1[], letter frequency_PT2[], let
 		}
 	}
 
-	/*
+	
 	cout << "Frequency of all alphabets in the string is:" << endl;
 	for (int i = 0; i < 27; i++)
-		cout << char(i + 'a') << " : " << frequency_PT5[i] << endl;
-	cout << "_" << " : " << frequency_PT5[26] << endl;
-	*/
+		cout << char(i + 'a') << " : " << frequency_PT1[i].freq << endl;
+	cout << "_" << " : " << frequency_PT1[26].freq << endl;
+	
 
 	dictionary.close();
 }
