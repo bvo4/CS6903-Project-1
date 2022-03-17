@@ -6,6 +6,8 @@ from tqdm import tqdm
 import numpy as np
 import matplotlib.pyplot as plt
 
+from utils import plaintexts
+
 
 
 def get_letters():
