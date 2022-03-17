@@ -114,6 +114,8 @@ if __name__ == '__main__':
     ax[0].plot(accuracy[:, 0], accuracy[:, 1])
     ax[0].set_xlabel('probability of random character')
     ax[0].set_ylabel('prediction accuracy')
+    ax[0].axhline(0.2, color='red', label='baseline')
+    ax[0].legend()
     ax[1].plot(runtime[:, 0], runtime[:, 1])
     ax[1].set_xlabel('probability of random character')
     ax[1].set_ylabel('runtime (s)')
