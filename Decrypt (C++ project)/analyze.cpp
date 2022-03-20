@@ -135,8 +135,8 @@ void define_letter_frequency(letter frequency_PT1[], letter frequency_PT2[], let
 	
 	cout << "Frequency of all alphabets in the string is:" << endl;
 	for (int i = 0; i < 27; i++)
-		cout << char(i + 'a') << " : " << frequency_PT1[i].freq << endl;
-	cout << "_" << " : " << frequency_PT1[26].freq << endl;
+		cout << char(i + 'a') << " : " << frequency_PT4[i].freq << endl;
+	cout << "_" << " : " << frequency_PT4[26].freq << endl;
 	
 
 	dictionary.close();
