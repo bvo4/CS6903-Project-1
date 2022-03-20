@@ -32,8 +32,8 @@ float chi_square(mapping frequency[], letter* frequency_map, letter* frequency_P
 		cout << frequency_map[i].letter << " : " << frequency_map[i].freq << " vs. " << frequency_PT[i].letter << " : " << frequency_PT[i].freq << endl;
 		sum += pow (frequency_map[i].freq - frequency_PT[i].freq, 2);
 		sum = sum / (frequency_map[i].freq);
+		cout << endl << "SUM: " << sum << endl;
 	}
-	cout <<"SUM: " << sum << endl;
 	return sum;
 }
 
@@ -47,7 +47,7 @@ void percentile(letter frequency_map[], mapping frequency[])
 
 		cout << std::fixed;
 		cout << std::setprecision(2);
-		cout << "Percentile:  " << frequency_map[i].letter << "=" << percent << endl;
+		cout << "Percentile:  " << frequency_map[i].letter << " = " << percent << endl;
 	}
 
 }
@@ -132,12 +132,12 @@ void define_letter_frequency(letter frequency_PT1[], letter frequency_PT2[], let
 		}
 	}
 
-	
+	/*
 	cout << "Frequency of all alphabets in the string is:" << endl;
 	for (int i = 0; i < 27; i++)
 		cout << char(i + 'a') << " : " << frequency_PT4[i].freq << endl;
 	cout << "_" << " : " << frequency_PT4[26].freq << endl;
-	
+	*/
 
 	dictionary.close();
 }

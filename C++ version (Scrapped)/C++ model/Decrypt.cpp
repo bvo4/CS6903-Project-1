@@ -49,7 +49,7 @@ void key_map(mapping frequency[], letter frequency_PT[], string ciphertext);
 string decryption_scheme(string input, map<char, char> key) {
 //	/* The different parameters */
 //
-	letter frequency_map[27] = { 0 };	//We will be using this to map out the letter frequency of the ciphertext
+	letter frequency_map[27];	//We will be using this to map out the letter frequency of the ciphertext
 	string output;
 //
 //	/* First, we will begin by acquiring the letter frequency of the ciphertext and the 5 plaintext candidates */
@@ -138,8 +138,8 @@ void Compare_Frequency(letter frequency_map[], string ciphertext)
 	copy(temp_PT.begin(), temp_PT.end(), temp_PT2);
 	copy(temp_CT.begin(), temp_CT.end(), temp_CT2);
 
-	percentile(frequency_PT1, frequency);
-	//cout << "Chi Square of : " << chi_square(frequency, temp_CT2, temp_PT2) << endl;
+	percentile(temp_PT2, frequency);
+	cout << "Chi Square of : " << chi_square(frequency, temp_CT2, temp_PT2) << endl;
 	key_map(frequency, temp_PT2, ciphertext);
 
 }
