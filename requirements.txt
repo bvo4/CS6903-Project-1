@@ -1,4 +1,4 @@
-#Because five libraries were used, numpy, tqdm, matplotlib, scipy, and scikit-learn
+#Because five external libraries were used for the python decryption scheme, the following must be installed on Python for the code to work: numpy, tqdm, matplotlib, scipy, and scikit-learn
 
 pip install scikit-learn
 pip install tqdm
