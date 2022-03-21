@@ -1,4 +1,4 @@
-# CS6903-Project-1
+# Monoalphabetic cipher decryption method based on linear regression and standard deviation
 
 Because two different methods were attempted for the decryption process, two decryption files have been provided to showcase the different decryption methods used.  
 
