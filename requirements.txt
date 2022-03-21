@@ -1,1 +1,7 @@
-#Because two libraries were used, numpy and 
+#Because two libraries were used, numpy, tqdm, matplotlib, scipy, and scikit-learn
+
+pip install scikit-learn
+pip install tqdm
+pip install matplotlib
+pip install numpy
+pip install scipy
