@@ -142,7 +142,9 @@ def decrypt(ciphertext):
 
 
 if __name__ == '__main__':
-    from evaluate import encrypt
-    pred = decrypt(encrypt(plaintexts[1]))
-    print(pred)
+    
+    cipher_text = input("Enter the Ciphertext: \n")
+    print("Deciphering Ciphertext...")
+    guess = decrypt(cipher_text)
+    print("My plaintext guess is Plain Text #{}".format(guess))
 
