@@ -2,7 +2,7 @@
 
 Participants:
 
-Alvin Craighton (ac7807@nyu.edu)
+Alvin Crighton (ac7807@nyu.edu)
 
 Rohin Dasari (d2893@nyu.edu)
 
