@@ -15,6 +15,16 @@ plaintexts = {
     }
 
 
+def get_relative_positions(text, letter):
+  pos = [i for i, l in enumerate(text) if l == letter]
+  return [p/len(text) for p in pos]
+
+def get_letters():
+  letters = [letter for letter in string.ascii_lowercase]
+  letters.append(' ')
+  return letters
+
+
 def compute_letter_frequencies(text):
     # build dictionary to store letter frequencies
     freq = {}
