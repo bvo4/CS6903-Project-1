@@ -1,6 +1,7 @@
 # CS6903-Project-1
 
 Because two different methods were attempted for the decryption process, two decryption files have been provided to showcase the different decryption methods used.  
+
 percentile_matching.py and regress_decrypt.py are the two main methods used to call upon their own decryption algorithm which work independently of one another.
 
 Participants:
