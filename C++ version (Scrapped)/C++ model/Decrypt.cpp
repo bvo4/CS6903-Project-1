@@ -138,9 +138,9 @@ void Compare_Frequency(letter frequency_map[], string ciphertext)
 	copy(temp_PT.begin(), temp_PT.end(), temp_PT2);
 	copy(temp_CT.begin(), temp_CT.end(), temp_CT2);
 
-	percentile(temp_PT2, frequency);
-	cout << "Chi Square of : " << chi_square(frequency, temp_CT2, temp_PT2) << endl;
-	key_map(frequency, temp_PT2, ciphertext);
+	//percentile(temp_PT2, frequency);
+	//chi_square(frequency, temp_CT2, temp_PT2);
+	//key_map(frequency, temp_PT2, ciphertext);
 
 }
 
