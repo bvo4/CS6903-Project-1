@@ -1,4 +1,4 @@
-# Monoalphabetic cipher decryption method based on linear regression, Chi-Square statistics and standard deviation
+# Cryptanalysis of A Class of Ciphers Based on Linear Regression, Standard Deviation, and Chi-Squared Statistic
 
 Because two different methods were attempted for the decryption process, two decryption files have been provided to showcase the different decryption methods used.  
 
